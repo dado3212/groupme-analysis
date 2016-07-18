@@ -1,2 +1,3 @@
-# groupme-analysis
-A bot that provides easy GroupMe analysis
+# GroupMe: Chatterbot
+
+A test to see how a groupme bot would optimally function.
