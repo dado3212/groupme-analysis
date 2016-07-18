@@ -1,6 +1,6 @@
 {
   "name": "groupme_analysis",
-  "version": "0.1",
+  "version": "1.0.0",
   "description": "A bot that provides easy GroupMe analysis",
   "author": "Alex Beals",
   "main": "app/server.js",
