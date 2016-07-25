@@ -1,0 +1,12 @@
+html, body {
+  margin: 0px; }
+
+header {
+  background-color: #00658a;
+  padding: 20px; }
+  header img {
+    display: block;
+    margin: 0 auto;
+    max-width: 400px; }
+
+/*# sourceMappingURL=home.css.map */

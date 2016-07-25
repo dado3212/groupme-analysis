@@ -1,0 +1,17 @@
+$main-color: #00aff0;
+
+html, body {
+	margin: 0px;
+}
+
+header {
+	background-color: darken($main-color, 20%);
+	padding: 20px;
+
+	img {
+		display: block;
+		margin: 0 auto;
+
+		max-width: 400px;
+	}
+}
