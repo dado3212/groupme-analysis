@@ -1,6 +1,6 @@
 <?php
 	// Character set adapted from http://ux.stackexchange.com/a/21078
-	$code = substr(str_shuffle(str_repeat("abcdefghkmnoprstwxzABCDEFGHJKLMNPQRTWXY", 6)), 0, 6);
+	$name = substr(str_shuffle(str_repeat("abcdefghkmnoprstwxzABCDEFGHJKLMNPQRTWXY", 6)), 0, 6);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,14 +34,14 @@
 					<h3>Step 3</h3>
 					Set the user's name to:
 					<div class="well">
-						<?php echo $code; ?>
+						<?php echo $name; ?>
 					</div>
 					<img src="assets/add2.jpg" />
 				</li>
 				<li>
 					<h3>Step 4</h3>
 					Click this button once the user has been added to the group!
-					<button type="submit" class="cta" data-name="<?php echo $code; ?>">Added!</button>
+					<button type="submit" id="added" class="cta" data-name="<?php echo $name; ?>">Added!</button>
 				</li>
 			</ul>
 		</div>
