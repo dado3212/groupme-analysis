@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+
 	define('API', TRUE);
 	include_once('groupme.php');
 
@@ -8,7 +11,7 @@
 		$group = findGroupByName($_POST['name']);
 		if ($group) {
 			echo 'Found group: ' . $group;
-			analyze($group);
+			echo "<pre>" . print_r(json_decode(analyze($group), true), true) . "</pre>";
 		} else {
 			echo 'Not added.';
 		}

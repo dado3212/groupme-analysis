@@ -48,10 +48,90 @@
 		global $TOKEN;
 
 		$members = getMembers($group);
-		print_2($members);
 
 		$messages = getMessages($group);
-		print_2($messages);
+
+		// Total data
+		$totalComments = 0;
+		$totalLikes = 0;
+		$words = 0;
+		$names = [];
+		$topics = [];
+		$mostPopular = [];
+
+		foreach ($messages as $message) {
+			$totalComments += 1;
+			$totalLikes += count($message["likes"]);
+			$words += count(explode(" ", $message["text"]));
+
+			if ($message["sender_type"] == "user") { // User message
+				if (array_key_exists($message["sender_id"], $members)) {
+					$poster = $message["sender_id"];
+
+					// Increment total number of received likes, comments, and words
+					$members[$poster]["total_number"] += 1;
+					$members[$poster]["total_likes_received"] += count($message["likes"]);
+					$members[$poster]["total_words"] += count(explode(" ", $message["text"]));
+
+					// Check top comment
+					if (count($message["likes"]) > $members[$poster]["max_likes"]) {
+						$members[$poster]["max_likes"] = count($message["likes"]);
+						$members[$poster]["best_comment"] = $message["text"];
+					}
+
+					// Increment likes given
+					foreach ($message["likes"] as $liker) {
+						if (array_key_exists($liker, $members)) {
+							$members[$liker]["total_likes_given"] += 1;
+
+							// Check self likes
+							if ($liker == $poster) {
+								$members[$poster]["self_likes"] += 1;
+							}
+						} else { // Liked by a non-existent member
+
+						}
+					}
+				} else { // Not a current member...
+
+				}
+			} else if ($message["sender_type"] == "system") { // System messages
+				if (
+					strpos($message["text"], "changed the topic to: ") !== false &&
+					strpos($message["text"], "changed the topic to: ") > 0 &&
+					(strpos($message["text"], "changed the group's name to ") === false || strpos($message["text"], "changed the group's name to ") > strpos($message["text"], "changed the topic to: "))
+				) { // Topic change
+					$topics[] = [
+						"name" => substr($message["text"], strpos($message["text"], "changed the topic to: ") + 22),
+						"time" => $message["time"],
+						"likes" => count($message["likes"]),
+					];
+				} else if (
+					strpos($message["text"], "changed the group's name to ") !== false &&
+					strpos($message["text"], "changed the group's name to ") > 0 &&
+					(strpos($message["text"], "changed the topic to: ") === false || strpos($message["text"], "changed the group's name to ") < strpos($message["text"], "changed the topic to: "))
+				) { // Group name change
+					$names[] = [
+						"name" => substr($message["text"], strpos($message["text"], "changed the group's name to ") + 28),
+						"time" => $message["time"],
+						"likes" => count($message["likes"]),
+					];
+				}
+			} else { // Not currently handled (bot messages?)
+				echo $message["sender_type"];
+			}
+		}
+
+		return json_encode([
+			"individuals" => $members,
+			"total" => [
+				"comments" => $totalComments,
+				"likes" => $totalLikes,
+				"names" => $names,
+				"topics" => $topics,
+				"words" => $words,
+			],
+		]);
 	}
 
 	/**
@@ -78,6 +158,8 @@
 				'total_likes_received' => 0,
 				'total_likes_given' => 0,
 				'total_number' => 0,
+				'self_likes' => 0,
+				'total_words' => 0,
 				'max_likes' => 0,
 				'best_comment' => '',
 			];
@@ -115,6 +197,7 @@
 					"sender_id" => $msg["sender_id"],
 					"sender_type" => $msg["sender_type"],
 					"text" => $msg["text"],
+					"time" => $msg["created_at"],
 				];
 			}
 
