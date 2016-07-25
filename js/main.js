@@ -3,8 +3,15 @@ $(document).ready(function() {
     // Run PHP script
     $.post('php/check.php', {
       name: $(this).data('name'), 
-    }, function(data) {
-      console.log(data);
+    })
+    .done(function(data) {
+      var res = $.parseJSON(data);
+
+      if (res.response === "error") {
+        console.log("Failed");
+      } else {
+        console.log("Succeeded");
+      }
     });
   });
 });

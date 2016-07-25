@@ -5,17 +5,30 @@ error_reporting(E_ALL);
 	define('API', TRUE);
 	include_once('groupme.php');
 
-	$_POST['name'] = 'eRxwez';
+	// $_POST['name'] = 'eRxwez';
 
 	if (isset($_POST['name']) && strlen($_POST['name']) == 6) {
 		$group = findGroupByName($_POST['name']);
 		if ($group) {
-			echo 'Found group: ' . $group;
-			echo "<pre>" . print_r(json_decode(analyze($group), true), true) . "</pre>";
+			$response = [
+				"response" => "success",
+				"code" => 3,
+				"message" => json_encode(["group" => $group]),
+			];
 		} else {
-			echo 'Not added.';
+			$response = [
+				"response" => "error",
+				"code" => 1,
+				"message" => "Not added.",
+			];
 		}
 	} else {
-		echo 'Invalid name.';
+		$response = [
+			"response" => "error",
+			"code" => 2,
+			"message" => "Invalid name.",
+		];
 	}
+
+	echo json_encode($response);
 ?>

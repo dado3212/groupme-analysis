@@ -7,12 +7,6 @@
 	}
 	require_once('secret.php');
 
-	findGroupByName('test');
-
-	function print_2($text) {
-		echo "<pre>" . print_r($text, true) . "</pre>";
-	}
-
 	/**
 	 * Attempts to find the group in which it has a given name
 	 * @param $name The name that it's looking for
