@@ -47,18 +47,34 @@
 	function analyze($group) {
 		global $TOKEN;
 
+		$members = getMembers($group);
+		print_2($members);
+
+		$messages = getMessages($group);
+		print_2($messages);
+	}
+
+	/**
+	 * Finds and formats all members of a group
+	 * @param $group The group ID
+	 * @return An array of formatted members
+	 */
+	function getMembers($group) {
+		global $TOKEN;
+
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/${group}?token=${TOKEN}&per_page=100");
+		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/${group}?token=${TOKEN}");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$contents = curl_exec($ch);
 		curl_close($ch);
 
-		$members = json_decode($contents, true)['response']['members'];
-		$users = [];
+		$rawMembers = json_decode($contents, true)['response']['members'];
+		$members = [];
 
-		foreach ($members as $member) {
-			$users[$member['user_id']] = [
+		foreach ($rawMembers as $member) {
+			$members[$member['user_id']] = [
 				'name' => $member['nickname'],
+				'image' => $member['image_url'],
 				'total_likes_received' => 0,
 				'total_likes_given' => 0,
 				'total_number' => 0,
@@ -67,14 +83,15 @@
 			];
 		}
 
-		print_2($users);
-
-		$messages = [];
-		getMessages($group, $messages);
-		print_2($messages);
+		return $members;
 	}
 
-	function getMessages($group, &$messages, $before = null) {
+	/**
+	 * Finds and formats all messages of a group
+	 * @param $group The group ID
+	 * @return An array of formatted messages
+	 */
+	function getMessages($group, $messages = [], $before = null) {
 		global $TOKEN;
 
 		if ($before) {
@@ -101,9 +118,9 @@
 				];
 			}
 
-			getMessages($group, $messages, $messages[count($messages)-1]["id"]);
+			return getMessages($group, $messages, $messages[count($messages)-1]["id"]);
 		} else {
-			echo "Done!";
+			return $messages;
 		}
 	}
 ?>
