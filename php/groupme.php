@@ -70,7 +70,7 @@
 					// Check top comment
 					if (count($message["likes"]) > $members[$poster]["max_likes"]) {
 						$members[$poster]["max_likes"] = count($message["likes"]);
-						$members[$poster]["best_comment"] = $message["text"];
+						$members[$poster]["best_comment"] = $message;
 					}
 
 					// Increment likes given
@@ -116,7 +116,7 @@
 			}
 		}
 
-		return json_encode([
+		return [
 			"individuals" => $members,
 			"total" => [
 				"comments" => $totalComments,
@@ -125,7 +125,7 @@
 				"topics" => $topics,
 				"words" => $words,
 			],
-		]);
+		];
 	}
 
 	/**

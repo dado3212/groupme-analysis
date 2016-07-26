@@ -1,0 +1,26 @@
+html, body {
+  margin: 0px;
+  color: #484c55;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: content-box;
+  background-color: #f8f8f8; }
+
+h1 {
+  margin: 0px;
+  padding: 20px 0;
+  font-weight: 600;
+  text-align: center; }
+
+#main {
+  text-align: center; }
+  #main div {
+    font-size: 1.4em; }
+    #main div img {
+      max-width: 1.1em;
+      max-height: 1.1em;
+      vertical-align: middle; }
+    #main div img, #main div i {
+      margin-right: 5px; }
+
+/*# sourceMappingURL=stats.css.map */

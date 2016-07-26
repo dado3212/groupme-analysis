@@ -1,0 +1,46 @@
+$main-color: #00aff0;
+$text-color: #484c55;
+$background-color: #f8f8f8;
+
+$highlight-color: #77c32f;
+
+$well-color: #f8f8f8;
+
+html, body {
+	margin: 0px;
+
+	color: $text-color;
+	font-size: 16px;
+	font-family: "Open Sans", sans-serif;
+
+	box-sizing: content-box;
+
+	background-color: $background-color;
+}
+
+h1 {
+	margin: 0px;
+	padding: 20px 0;
+
+	font-weight: 600;
+	text-align: center;
+}
+
+#main {
+	text-align: center;
+
+	div {
+		font-size: 1.4em;
+
+		img {
+			max-width: 1.1em;
+			max-height: 1.1em;
+
+			vertical-align: middle;
+		}
+
+		img, i {
+			margin-right: 5px;
+		}
+	}
+}

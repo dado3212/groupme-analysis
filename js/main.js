@@ -6,6 +6,7 @@ $(document).ready(function() {
     })
     .done(function(data) {
       var res = $.parseJSON(data);
+      console.log(res);
 
       if (res.response === "error") {
         console.log("Failed");
