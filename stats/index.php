@@ -5,6 +5,8 @@
 	define('API', TRUE);
 	include_once('../php/groupme.php');
 
+	// Actual Group: 16897222
+	// Test Group: 23376041
 	$groupID = "16897222";
 	$info = analyze($groupID);
 
@@ -17,15 +19,61 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!-- Font Awesome -->
 		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
+		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
+		<!-- DataTables -->
 		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
 		<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
+		<!-- Custom -->
 		<link type="text/css" rel="stylesheet" href="../build/stats.css">
 		<script src="../js/stats.js"></script>
+
+		<script>
+			function drawChart(values, name) {
+				var data = new google.visualization.DataTable();
+				data.addColumn('timeofday', 'Time of Day');
+				data.addColumn('number', 'Number of Messages');
+
+				data.addRows(values);
+
+				var options = {
+					title: name + '\'s Activity',
+					height: 450,
+					hAxis: {
+						format: 'ha',
+						viewWindow: {
+							min: [0, 0, 0],
+							max: [23, 59, 59]
+						},
+						gridlines: { count: 12 } 
+					},
+					legend: 'none',
+				};
+
+				var chart = new google.visualization.ColumnChart(document.getElementById('histogram'));
+
+				chart.draw(data, options);
+			}
+
+			// Instantiate each individual's object
+			<?php
+				for ($i = 0; $i < count($info["individuals"]); $i++) {
+					echo "var person$i = " . json_encode(array_slice($info["individuals"], $i, 1)[0]) . ";\n";
+				}
+			?>
+		</script>
+
+		<!-- Google Charts -->
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+		  google.charts.load('current', {packages: ['corechart']});
+		  google.charts.setOnLoadCallback(function(){ changePerson(person0); });
+		</script>
 	</head>
 	<body>
 		<header>
@@ -33,7 +81,7 @@
 			<h3><?php echo $topics[0]["name"] ?></h3>
 		</header>
 		<div id="group" style="display: none;">
-			<div id="main">
+			<div class="main-stats">
 				<div>
 					<img src="../assets/groupme.png" />
 					<?php echo number_format($info['total']['comments']) . " comments"; ?>
@@ -102,10 +150,13 @@
 							<th>Likes Received/Comment</th>
 							<th>Self Likes</th>
 							<th>Best Comment</th>
+							<th>Details</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($info["individuals"] as $member) { ?>
+						<?php for ($i = 0; $i < count($info["individuals"]); $i++) {
+							$member = array_slice($info["individuals"], $i, 1)[0];
+						 ?>
 						<tr>
 							<td><?php echo $member["name"]; ?></td>
 							<td><?php echo $member["total_number"]; ?></td>
@@ -116,10 +167,30 @@
 							<td><?php echo ($member["total_number"] > 0) ? round($member["total_likes_received"]/$member["total_number"], 2) : 0; ?></td>
 							<td><?php echo $member["self_likes"]; ?></td>
 							<td><?php echo $member["best_comment"] ? $member["best_comment"]["text"] . " (<span>" . $member["max_likes"] . "</span> likes)" : "No liked comments. :( <span style='display: none;'>0</span>"; ?></td>
+							<td><?php echo "<button onclick=\"changePerson(person$i)\">Details</button>"; ?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
 				</table>
+			</div>
+			<div id="detail">
+				<h1></h1>
+				<img src="" />
+				<div class="main-stats">
+					<div class="comments">
+						<img src="../assets/groupme.png" />
+						<span></span>
+					</div>
+					<div class="words">
+						<i class="fa fa-book" aria-hidden="true"></i>
+						<span></span>
+					</div>
+					<div class="likes">
+						<img src="../assets/heart.png" />
+						<span></span>
+					</div>
+				</div>
+				<div id="histogram"></div>
 			</div>
 		</div>
 		<?php echo "<pre>" . print_r($info, true) . "</pre>"; ?>

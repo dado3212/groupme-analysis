@@ -2,10 +2,12 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
-	if (!defined('API')) {
-		die('Direct access not permitted.');
-	}
+	//if (!defined('API')) {
+	//	die('Direct access not permitted.');
+	//}
 	require_once('secret.php');
+
+	// echo "<pre>" . print_r(analyze("23376041"), true) . "</pre>";
 
 	/**
 	 * Attempts to find the group in which it has a given name
@@ -34,12 +36,14 @@
 	}
 
 	/**
-	 * Attempts to find the group in which it has a given name
-	 * @param $name The name that it's looking for
-	 * @return the group id if successful, otherwise false
+	 * Analyzes the group for useful data
+	 * @param $group The Group ID to check against
+	 * @return a complex array of formatted information
 	 */
 	function analyze($group) {
+		// Initialize
 		global $TOKEN;
+		date_default_timezone_set("America/New_York");
 
 		$members = getMembers($group);
 
@@ -68,6 +72,9 @@
 					$members[$poster]["total_number"] += 1;
 					$members[$poster]["total_likes_received"] += count($message["likes"]);
 					$members[$poster]["total_words"] += count(explode(" ", $message["text"]));
+
+					// Add to array of all posts and their times
+					$members[$poster]["times"][date('G',$message["time"])] += 1;
 
 					// Check top comment
 					if (count($message["likes"]) > $members[$poster]["max_likes"]) {
@@ -159,6 +166,32 @@
 				'total_words' => 0,
 				'max_likes' => 0,
 				'best_comment' => '',
+				'times' => [
+					0 => 0,
+					1 => 0,
+					2 => 0,
+					3 => 0,
+					4 => 0,
+					5 => 0,
+					6 => 0,
+					7 => 0,
+					8 => 0,
+					9 => 0,
+					10 => 0,
+					11 => 0,
+					12 => 0,
+					13 => 0,
+					14 => 0,
+					15 => 0,
+					16 => 0,
+					17 => 0,
+					18 => 0,
+					19 => 0,
+					20 => 0,
+					21 => 0,
+					22 => 0,
+					23 => 0,
+				],
 			];
 		}
 

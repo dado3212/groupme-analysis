@@ -16,15 +16,15 @@ h3 {
   padding: 0 0 20px 0;
   font-weight: 400; }
 
-#main {
+.main-stats {
   text-align: center; }
-  #main div {
+  .main-stats div {
     font-size: 1.4em; }
-    #main div img {
+    .main-stats div img {
       max-width: 1.1em;
       max-height: 1.1em;
       vertical-align: middle; }
-    #main div img, #main div i {
+    .main-stats div img, .main-stats div i {
       margin-right: 5px; }
 
 #comments {
@@ -63,5 +63,11 @@ h3 {
 
 #individuals .members {
   margin: 20px; }
+#individuals #detail > img {
+  max-width: 150px;
+  max-height: 150px;
+  display: block;
+  margin: auto;
+  border-radius: 50%; }
 
 /*# sourceMappingURL=stats.css.map */

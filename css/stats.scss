@@ -32,7 +32,7 @@ h3 {
 	font-weight: 400;
 }
 
-#main {
+.main-stats {
 	text-align: center;
 
 	div {
@@ -114,5 +114,16 @@ h3 {
 #individuals {
 	.members {
 		margin: 20px;
+	}
+
+	#detail {
+		> img {
+			max-width: 150px;
+			max-height: 150px;
+
+			display: block;
+			margin: auto;
+			border-radius: 50%;
+		}
 	}
 }
