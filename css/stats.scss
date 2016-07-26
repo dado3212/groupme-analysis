@@ -18,12 +18,18 @@ html, body {
 	background-color: $background-color;
 }
 
-h1 {
+h1, h3 {
 	margin: 0px;
-	padding: 20px 0;
+	padding: 20px 0 0 0;
 
 	font-weight: 600;
 	text-align: center;
+}
+
+h3 {
+	padding: 0 0 20px 0;
+
+	font-weight: 400;
 }
 
 #main {
@@ -41,6 +47,66 @@ h1 {
 
 		img, i {
 			margin-right: 5px;
+		}
+	}
+}
+
+#comments {
+	margin: 20px;
+
+	ul {
+		list-style-type: none;
+		padding: 0px;
+
+		li {
+			// background-color: white;
+			padding: 20px;
+			border-radius: 3px;
+			// box-shadow: 0 0 3px;
+
+			display: table;
+			margin: 0 auto 10px auto;
+
+			* {
+				display: inline-block;
+
+				vertical-align: middle;
+			}
+
+			.prefix {
+				font-size: 2em;
+				margin-right: 20px;
+
+				.gold {
+					max-width: 150px;
+					max-height: 150px;
+				}
+
+				.silver {
+					max-width: 100px;
+					max-height: 100px;
+				}
+
+				.bronze {
+					max-width: 50px;
+					max-height: 50px;
+				}
+			}
+
+			.content {
+				img {
+					max-width: 200px;
+					max-height: 200px;
+
+					display: inline-block;
+				}
+
+				.author {
+					display: block;
+					text-align: right;
+					margin-right: 10px;
+				}
+			}
 		}
 	}
 }

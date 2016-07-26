@@ -45,13 +45,15 @@
 
 		$messages = getMessages($group);
 
+		usort($messages, function ($a, $b) { return count($a["likes"]) < count($b["likes"]); });
+
 		// Total data
 		$totalComments = 0;
 		$totalLikes = 0;
 		$words = 0;
 		$names = [];
 		$topics = [];
-		$mostPopular = [];
+		$mostPopular = array_slice($messages, 0, 10);
 
 		foreach ($messages as $message) {
 			$totalComments += 1;
@@ -124,6 +126,7 @@
 				"names" => $names,
 				"topics" => $topics,
 				"words" => $words,
+				"popular" => $mostPopular,
 			],
 		];
 	}

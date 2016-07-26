@@ -6,11 +6,15 @@ html, body {
   box-sizing: content-box;
   background-color: #f8f8f8; }
 
-h1 {
+h1, h3 {
   margin: 0px;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
   font-weight: 600;
   text-align: center; }
+
+h3 {
+  padding: 0 0 20px 0;
+  font-weight: 400; }
 
 #main {
   text-align: center; }
@@ -22,5 +26,39 @@ h1 {
       vertical-align: middle; }
     #main div img, #main div i {
       margin-right: 5px; }
+
+#comments {
+  margin: 20px; }
+  #comments ul {
+    list-style-type: none;
+    padding: 0px; }
+    #comments ul li {
+      padding: 20px;
+      border-radius: 3px;
+      display: table;
+      margin: 0 auto 10px auto; }
+      #comments ul li * {
+        display: inline-block;
+        vertical-align: middle; }
+      #comments ul li .prefix {
+        font-size: 2em;
+        margin-right: 20px; }
+        #comments ul li .prefix .gold {
+          max-width: 150px;
+          max-height: 150px; }
+        #comments ul li .prefix .silver {
+          max-width: 100px;
+          max-height: 100px; }
+        #comments ul li .prefix .bronze {
+          max-width: 50px;
+          max-height: 50px; }
+      #comments ul li .content img {
+        max-width: 200px;
+        max-height: 200px;
+        display: inline-block; }
+      #comments ul li .content .author {
+        display: block;
+        text-align: right;
+        margin-right: 10px; }
 
 /*# sourceMappingURL=stats.css.map */
