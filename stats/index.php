@@ -5,7 +5,7 @@
 	define('API', TRUE);
 	include_once('../php/groupme.php');
 
-	$groupID = "23376041";
+	$groupID = "16897222";
 	$info = analyze($groupID);
 
 	$names = $info["total"]["names"];
@@ -17,16 +17,22 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
-		<link type="text/css" rel="stylesheet" href="../build/stats.css" />
-		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+		<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+		<link type="text/css" rel="stylesheet" href="../build/stats.css">
+		<script src="../js/stats.js"></script>
 	</head>
 	<body>
 		<header>
 			<h1><?php echo $names[0]["name"] ?></h1>
 			<h3><?php echo $topics[0]["name"] ?></h3>
 		</header>
-		<div class="group">
+		<div id="group" style="display: none;">
 			<div id="main">
 				<div>
 					<img src="../assets/groupme.png" />
@@ -80,6 +86,40 @@
 					</li>
 				<?php } ?>
 				</ul>
+			</div>
+		</div>
+		<div id="individuals">
+			<div class="members">
+				<table id="members" class="display">
+					<thead>
+						<tr>
+							<th>User</th>
+							<th>Comments</th>
+							<th>Words</th>
+							<th>Likes Received</th>
+							<th>Likes Given</th>
+							<th>Likes Given/Likes Received</th>
+							<th>Likes Received/Comment</th>
+							<th>Self Likes</th>
+							<th>Best Comment</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($info["individuals"] as $member) { ?>
+						<tr>
+							<td><?php echo $member["name"]; ?></td>
+							<td><?php echo $member["total_number"]; ?></td>
+							<td><?php echo $member["total_words"]; ?></td>
+							<td><?php echo $member["total_likes_received"]; ?></td>
+							<td><?php echo $member["total_likes_given"]; ?></td>
+							<td><?php echo ($member["total_likes_received"] > 0) ? round($member["total_likes_given"]/$member["total_likes_received"], 2) : 0; ?></td>
+							<td><?php echo ($member["total_number"] > 0) ? round($member["total_likes_received"]/$member["total_number"], 2) : 0; ?></td>
+							<td><?php echo $member["self_likes"]; ?></td>
+							<td><?php echo $member["best_comment"] ? $member["best_comment"]["text"] . " (<span>" . $member["max_likes"] . "</span> likes)" : "No liked comments. :( <span style='display: none;'>0</span>"; ?></td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<?php echo "<pre>" . print_r($info, true) . "</pre>"; ?>
