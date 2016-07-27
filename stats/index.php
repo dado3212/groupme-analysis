@@ -5,10 +5,17 @@
 	define('API', TRUE);
 	include_once('../php/groupme.php');
 
-	// Actual Group: 16897222
-	// Test Group: 23376041
-	$groupID = "23376041";
-	$info = analyze($groupID);
+	$PDO = createConnection();
+
+	$stmt = $PDO->prepare("SELECT * FROM groups WHERE name=:name AND password=:password");
+	$stmt->bindValue(":name", $_GET['group'], PDO::PARAM_STR);
+	$stmt->bindValue(":password", $_GET['password'], PDO::PARAM_STR);
+
+	$stmt->execute();
+
+	$response = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	$info = json_decode($response["data"], true);
 
 	$names = $info["total"]["names"];
 	$topics = $info["total"]["topics"];
@@ -19,7 +26,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title><?php echo "Groupme Analysis | $names[0]"; ?></title>
+		<title><?php echo "Groupme Analysis | {$names[0]['name']}"; ?></title>
 
 		<!-- Font Awesome -->
 		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -81,6 +88,7 @@
 		<header>
 			<h1><?php echo $names[0]["name"] ?></h1>
 			<h3><?php echo $topics[0]["name"] ?></h3>
+			<h6><?php echo "(As of " . date("M d, Y h:i a", strtotime($response['date'])) . ")"; ?></h6>
 		</header>
 		<div id="group" style="display: none;">
 			<div class="main-stats">

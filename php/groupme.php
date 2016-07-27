@@ -2,13 +2,14 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
-	if (!defined('API')) {
-		die('Direct access not permitted.');
-	}
-	// define('API', true);
+	// if (!defined('API')) {
+	// 	die('Direct access not permitted.');
+	// }
+	 define('API', true);
 	require_once('secret.php');
 
-	// echo "<pre>" . print_r(analyze("23376041"), true) . "</pre>";
+	// echo "<pre>" . print_r(analyze("16897222"), true) . "</pre>";
+	leaveGroup("16897222");
 
 	/**
 	 * Attempts to find the group in which it has a given name
@@ -257,6 +258,57 @@
 			return getMessages($group, $messages, $messages[count($messages)-1]["id"]);
 		} else {
 			return $messages;
+		}
+	}
+
+	/**
+	 * Sends a message to a group
+	 * @param $group The group ID
+	 * @param $message The message to send
+	 * @return void
+	 */
+	function sendMessage($group, $message) {
+		global $TOKEN;
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/{$group}/messages?token=${TOKEN}");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, 'Content-Type: application/json');        
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, '{"message": {"text":"' . $message . '"}}');
+		$contents = json_decode(curl_exec($ch), true);
+		curl_close($ch);
+	}
+
+	/**
+	 * Leaves a group
+	 * @param $group The group ID
+	 * @return void
+	 */
+	function leaveGroup($group) {
+		global $TOKEN;
+		global $ME;
+
+		// Finds membership ID
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/${group}?token=${TOKEN}");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$contents = curl_exec($ch);
+		curl_close($ch);
+
+		$rawMembers = json_decode($contents, true)['response']['members'];
+
+		foreach ($rawMembers as $member) {
+			if ($member["user_id"] === $ME) {
+				// Leaves group
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/{$group}/members/{$member['id']}/remove?token={$TOKEN}");
+				curl_setopt($ch, CURLOPT_POST, 1);
+				curl_exec($ch);
+				curl_close($ch);
+
+				return;
+			}
 		}
 	}
 ?>

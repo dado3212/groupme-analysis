@@ -6,15 +6,18 @@ html, body {
   box-sizing: content-box;
   background-color: #f8f8f8; }
 
-h1, h3 {
+h1, h3, h6 {
   margin: 0px;
   padding: 20px 0 0 0;
   font-weight: 600;
   text-align: center; }
 
 h3 {
-  padding: 0 0 20px 0;
+  padding: 0px;
   font-weight: 400; }
+
+h6 {
+  padding: 0 0 20px 0; }
 
 .main-stats {
   text-align: center;
