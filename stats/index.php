@@ -7,7 +7,7 @@
 
 	// Actual Group: 16897222
 	// Test Group: 23376041
-	$groupID = "16897222";
+	$groupID = "23376041";
 	$info = analyze($groupID);
 
 	$names = $info["total"]["names"];
@@ -19,6 +19,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title><?php echo "Groupme Analysis | $names[0]"; ?></title>
+
 		<!-- Font Awesome -->
 		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
@@ -42,7 +44,7 @@
 				data.addRows(values);
 
 				var options = {
-					title: name + '\'s Activity',
+					title: name + '\'s Activity by Time',
 					height: 450,
 					hAxis: {
 						format: 'ha',
@@ -159,10 +161,10 @@
 						 ?>
 						<tr>
 							<td><?php echo $member["name"]; ?></td>
-							<td><?php echo $member["total_number"]; ?></td>
-							<td><?php echo $member["total_words"]; ?></td>
-							<td><?php echo $member["total_likes_received"]; ?></td>
-							<td><?php echo $member["total_likes_given"]; ?></td>
+							<td><?php echo number_format($member["total_number"]); ?></td>
+							<td><?php echo number_format($member["total_words"]); ?></td>
+							<td><?php echo number_format($member["total_likes_received"]); ?></td>
+							<td><?php echo number_format($member["total_likes_given"]); ?></td>
 							<td><?php echo ($member["total_likes_received"] > 0) ? round($member["total_likes_given"]/$member["total_likes_received"], 2) : 0; ?></td>
 							<td><?php echo ($member["total_number"] > 0) ? round($member["total_likes_received"]/$member["total_number"], 2) : 0; ?></td>
 							<td><?php echo $member["self_likes"]; ?></td>
@@ -185,14 +187,22 @@
 						<i class="fa fa-book" aria-hidden="true"></i>
 						<span></span>
 					</div>
-					<div class="likes">
+					<div class="likes-received">
 						<img src="../assets/heart.png" />
+						<span></span>
+					</div>
+					<div class="likes-given">
+						<img src="../assets/shared.png" />
+						<span></span>
+					</div>
+					<div class="self-likes">
+						<img src="../assets/smiley.png" />
 						<span></span>
 					</div>
 				</div>
 				<div id="histogram"></div>
 			</div>
 		</div>
-		<?php echo "<pre>" . print_r($info, true) . "</pre>"; ?>
+		<?php //echo "<pre>" . print_r($info, true) . "</pre>"; ?>
 	</body>
 </html>

@@ -34,6 +34,7 @@ h3 {
 
 .main-stats {
 	text-align: center;
+	margin-bottom: 10px;
 
 	div {
 		font-size: 1.4em;
@@ -124,6 +125,10 @@ h3 {
 			display: block;
 			margin: auto;
 			border-radius: 50%;
+		}
+
+		svg > rect {
+			fill: transparent !important;
 		}
 	}
 }

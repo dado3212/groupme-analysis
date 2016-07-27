@@ -2,9 +2,10 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
-	//if (!defined('API')) {
-	//	die('Direct access not permitted.');
-	//}
+	if (!defined('API')) {
+		die('Direct access not permitted.');
+	}
+	// define('API', true);
 	require_once('secret.php');
 
 	// echo "<pre>" . print_r(analyze("23376041"), true) . "</pre>";
@@ -83,7 +84,20 @@
 					}
 
 					// Increment likes given
-					foreach ($message["likes"] as $liker) {
+					for ($i = 0; $i < count($message["likes"]); $i++) {
+						$liker = $message["likes"][$i];
+						$others = $message["likes"];
+
+						unset($others[$i]);
+
+						foreach ($others as $other) {
+							if (array_key_exists($other, $members[$poster]["shared"])) {
+								$members[$poster]["shared"][$other] += 1;
+							} else {
+								$members[$poster]["shared"][$other] = 1;
+							}
+						}
+
 						if (array_key_exists($liker, $members)) {
 							$members[$liker]["total_likes_given"] += 1;
 
@@ -123,6 +137,14 @@
 			} else { // Not currently handled (bot messages?)
 				echo $message["sender_type"];
 			}
+		}
+
+		// Clean up useful information
+		foreach ($members as $key => $member) {
+			$shared = $member["shared"];
+			arsort($shared);
+
+			$members[$key]["shared"] = array_slice($shared, 0, 3, true);
 		}
 
 		return [
@@ -166,6 +188,7 @@
 				'total_words' => 0,
 				'max_likes' => 0,
 				'best_comment' => '',
+				'shared' => [],
 				'times' => [
 					0 => 0,
 					1 => 0,
