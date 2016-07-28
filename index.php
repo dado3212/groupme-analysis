@@ -7,42 +7,62 @@
 	<head>
 		<title>Groupme Analysis</title>
 
-		<link type="text/css" rel="stylesheet" href="build/home.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
 		<script src="js/main.js"></script>
+		<link type="text/css" rel="stylesheet" href="build/home.css" />
 	</head>
 	<body>
 		<header>
 			<img src="assets/header.png" alt="header" />
 		</header>
-		<div class="main">
-			<ul class="steps">
-				<li>
-					<h3>Step 1</h3>
-					Add user from menu.
-				</li>
-				<li>
-					<h3>Step 2</h3>
-					Use the phone number:
-					<div class="well">
-						+1 619-432-4317
-					</div>
-					and click 'Add new phone number'
-					<img src="assets/add1.jpg" />
-				</li>
-				<li>
-					<h3>Step 3</h3>
-					Set the user's name to:
-					<div class="well">
-						<?php echo $name; ?>
-					</div>
-					<img src="assets/add2.jpg" />
-				</li>
-				<li>
-					<h3>Step 4</h3>
-					Click this button once the user has been added to the group!
-					<button type="submit" id="added" class="cta" data-name="<?php echo $name; ?>">Added!</button>
-				</li>
+		<div class="cta">
+			<div>
+				<h1>Get all the statistics on your GroupMe messages!</h1>
+				<a class="button" href="#steps">Get Started</a>
+			</div>
+		</div>
+		<div class="steps" id="steps">
+			<ul>
+				<div class="row">
+					<li>
+						<h3>Step 1</h3>
+						<div>
+							Add user from menu.
+							<img src="assets/add0.jpg" />
+						</div>
+					</li>
+					<li>
+						<h3>Step 2</h3>
+						<div>
+							Use the phone number:
+							<div class="well">
+								+1 619-432-4317
+							</div>
+							and click 'Add new phone number'
+							<img src="assets/add1.jpg" />
+						</div>
+					</li>
+				</div>
+				<div class="row">
+					<li>
+						<h3>Step 3</h3>
+						<div>
+							Set the user's name to:
+							<div class="well">
+								<?php echo $name; ?>
+							</div>
+							<img src="assets/add2.jpg" />
+						</div>
+					</li>
+					<li>
+						<h3>Step 4</h3>
+						<div>
+							Click this button once the user has been added to the group!
+							<button type="submit" id="added" data-name="<?php echo $name; ?>">Added!</button>
+						</div>
+					</li>
+				</div>
 			</ul>
 		</div>
 	</body>

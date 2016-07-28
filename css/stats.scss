@@ -55,6 +55,30 @@ h6 {
 	}
 }
 
+.ui-tabs-nav {
+	list-style-type: none;
+	display: flex;
+	margin: 0;
+	padding: 0;
+
+	li {
+		flex: 1;
+		margin: 0 10px;
+		text-align: center;
+
+		border-radius: 5px;
+		background-color: $main-color;
+		border: 1px solid black;
+
+		a {
+			display: block;
+			padding: 20px;
+			text-decoration: none;
+			color: white;
+		}
+	}
+}
+
 #comments {
 	margin: 20px;
 
@@ -118,6 +142,17 @@ h6 {
 #individuals {
 	.members {
 		margin: 20px;
+
+		.detail-button {
+			-webkit-appearance: none;
+			border: 1px solid darken($main-color, 20%);
+			border-radius: 3px;
+			background-color: white;
+
+			font-size: 1.2em;
+			color: white;
+			background-color: $main-color;
+		}
 	}
 
 	#detail {

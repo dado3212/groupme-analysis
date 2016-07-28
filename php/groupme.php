@@ -2,14 +2,13 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
-	// if (!defined('API')) {
-	// 	die('Direct access not permitted.');
-	// }
-	 define('API', true);
+	if (!defined('API')) {
+		die('Direct access not permitted.');
+	}
+	// define('API', true);
 	require_once('secret.php');
 
 	// echo "<pre>" . print_r(analyze("16897222"), true) . "</pre>";
-	leaveGroup("16897222");
 
 	/**
 	 * Attempts to find the group in which it has a given name
@@ -168,6 +167,7 @@
 	 */
 	function getMembers($group) {
 		global $TOKEN;
+		global $ME;
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/${group}?token=${TOKEN}");
@@ -272,7 +272,7 @@
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/{$group}/messages?token=${TOKEN}");
-		curl_setopt($ch, CURLOPT_HTTPHEADER, 'Content-Type: application/json');        
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));        
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, '{"message": {"text":"' . $message . '"}}');

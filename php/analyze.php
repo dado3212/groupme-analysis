@@ -22,7 +22,9 @@
 
 			sendMessage($group, "Check out the analysis of this group at http://alexbeals.com/projects/groupme/stats?group=" . $_POST['name'] . "&password=" . $password);
 
-			leaveGroup($group);
+			sendMessage($group, "Please remove me now. (If I remove myself I can never come back 😞)");
+
+			// leaveGroup($group);
 
 			$response = [
 				"response" => "success",

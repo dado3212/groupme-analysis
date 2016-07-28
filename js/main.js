@@ -18,16 +18,30 @@ $(document).ready(function() {
         $.post('php/analyze.php', {
           name: name,
         }).done(function(data) {
+          console.log(data);
           var res = $.parseJSON(data);
 
           if (res.response === "error") {
             console.log("Failed");
           } else {
             console.log("Succeeded!");
-            console.log(res.url);
           }
         });
       }
     });
+  });
+
+  // Smooth scrolling through targets
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
   });
 });

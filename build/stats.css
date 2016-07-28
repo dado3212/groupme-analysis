@@ -31,6 +31,24 @@ h6 {
     .main-stats div img, .main-stats div i {
       margin-right: 5px; }
 
+.ui-tabs-nav {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0; }
+  .ui-tabs-nav li {
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #00aff0;
+    border: 1px solid black; }
+    .ui-tabs-nav li a {
+      display: block;
+      padding: 20px;
+      text-decoration: none;
+      color: white; }
+
 #comments {
   margin: 20px; }
   #comments ul {
@@ -67,6 +85,14 @@ h6 {
 
 #individuals .members {
   margin: 20px; }
+  #individuals .members .detail-button {
+    -webkit-appearance: none;
+    border: 1px solid #00658a;
+    border-radius: 3px;
+    background-color: white;
+    font-size: 1.2em;
+    color: white;
+    background-color: #00aff0; }
 #individuals #detail > img {
   max-width: 150px;
   max-height: 150px;

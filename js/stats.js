@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  // Set up Tabs
+  $('#tabs').tabs();
+
   // Set up DataTables
   $.fn.dataTableExt.oSort['comment-asc']  = function(x,y) {
     const val = /<span( style="display: none;")?>(\d+)<\/span>/;
@@ -33,6 +36,7 @@ $(document).ready(function() {
     ]
   });
 
+  // Update individual details
   changePerson = function (person) {
     // Update name
     $("#detail h1").html(person.name);
