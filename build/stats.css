@@ -1,10 +1,13 @@
 html, body {
   margin: 0px;
   color: #484c55;
+  background-color: white;
   font-size: 16px;
   font-family: "Open Sans", sans-serif;
-  box-sizing: content-box;
-  background-color: white; }
+  box-sizing: border-box;
+  height: 100%; }
+  html *, body * {
+    box-sizing: border-box; }
 
 h1, h3, h4, h6 {
   margin: 0px;
@@ -76,7 +79,51 @@ input, button, a {
       font-size: 0.8em;
       margin-bottom: 5px; }
 #group #comments {
-  margin: 20px; }
+  padding: 20px; }
+  #group #comments ul {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0px;
+    max-width: 50em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    #group #comments ul li {
+      background-color: white;
+      padding: 10px 20px;
+      transition: box-shadow 0.1s ease; }
+      #group #comments ul li:nth-child(2n) {
+        background-color: #f2f2f2; }
+      #group #comments ul li:hover {
+        position: relative;
+        z-index: 1;
+        box-shadow: inset 0 0 3px #008abd; }
+      #group #comments ul li .top {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px; }
+        #group #comments ul li .top .number {
+          font-size: 1.3em;
+          font-weight: 600;
+          margin: 0 15px 0 10px; }
+        #group #comments ul li .top .profile {
+          display: inline-block;
+          width: 3em;
+          height: 3em;
+          border-radius: 50%;
+          background-position: center;
+          background-size: contain;
+          margin-right: 10px; }
+        #group #comments ul li .top .likes {
+          font-size: 0.8em;
+          margin-left: auto; }
+          #group #comments ul li .top .likes img {
+            width: 1.4em;
+            height: 1.4em;
+            vertical-align: middle;
+            margin-right: 5px;
+            margin-top: -4px; }
+      #group #comments ul li img {
+        max-width: 200px;
+        max-height: 200px; }
 
 #individuals .members {
   padding: 20px; }

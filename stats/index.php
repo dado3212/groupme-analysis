@@ -134,31 +134,24 @@
 					<?php for ($i = 0; $i < count($info['total']['popular']); $i++) {
 						$post = $info['total']['popular'][$i];
 						$author = ($post["sender_type"] == "user") ? $info["individuals"][$post["sender_id"]]["name"] : "<code>System</code>";
+						$author_image = ($post["sender_type"] == "user") ? $info["individuals"][$post["sender_id"]]["image"] : "";
 						?>
 						<li>
-							<div class="prefix">
-							<?php
-								echo $i + 1;
-								/*if ($i == 0) {
-									echo "<img class='gold' src='../assets/gold.png' />";
-								} else if ($i == 1) {
-									echo "<img class='silver' src='../assets/silver.png' />";
-								} else if ($i == 2) {
-									echo "<img class='bronze' src='../assets/bronze.png' />";
-								} else {
-									echo $i + 1;
-								}*/
-							?>
+							<div class="top">
+								<span class="number"><?php echo $i + 1; ?></span>
+								<span class="profile" style="background-image: url('<?php echo $author_image; ?>');"></span>
+								<span class="name"><?php echo $author; ?></span>
+								<span class="likes"><img src="../assets/heart.png" /><?php echo count($post["likes"]); ?></span>
 							</div>
 							<div class="content">
 								<?php
 								if (count($post["attachments"]) == 0)
-									echo "<div><q>" . $post["text"] . "</q><span class='author'>- $author</span></div>";
+									echo "<div><q>" . $post["text"] . "</q></div>";
 								else {
 									echo "<img src='" . $post["attachments"][0]["url"] . "'/><div>";
 									if (strlen($post["text"]) > 0)
 										echo "<q>" . $post["text"] . "</q>";
-									echo "<span class='author'>- $author</span></div>";
+									echo "</div>";
 								}
 							?>
 							</div>
@@ -233,6 +226,6 @@
 				</div>
 			</div>
 		</div>
-		<?php //echo "<pre>" . print_r($info, true) . "</pre>"; ?>
+		<?php // echo "<pre>" . print_r($info, true) . "</pre>"; ?>
 	</body>
 </html>
