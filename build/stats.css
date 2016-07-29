@@ -4,95 +4,88 @@ html, body {
   font-size: 16px;
   font-family: "Open Sans", sans-serif;
   box-sizing: content-box;
-  background-color: #f8f8f8; }
+  background-color: white; }
+
+h1, h3, h4, h6 {
+  margin: 0px;
+  padding: 0px; }
 
 h1, h3, h6 {
-  margin: 0px;
   padding: 20px 0 0 0;
   font-weight: 600;
   text-align: center; }
 
 h3 {
-  padding: 0px;
   font-weight: 400; }
 
-h6 {
-  padding: 0 0 20px 0; }
-
-.main-stats {
-  text-align: center;
-  margin-bottom: 10px; }
-  .main-stats div {
-    font-size: 1.4em; }
-    .main-stats div img {
-      max-width: 1.1em;
-      max-height: 1.1em;
-      vertical-align: middle; }
-    .main-stats div img, .main-stats div i {
-      margin-right: 5px; }
+input, button, a {
+  outline: none; }
 
 .ui-tabs-nav {
   list-style-type: none;
-  display: flex;
-  margin: 0;
-  padding: 0; }
+  display: table;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  top: 35px;
+  background-color: #e6e5e0; }
   .ui-tabs-nav li {
-    flex: 1;
-    margin: 0 10px;
     text-align: center;
-    border-radius: 5px;
-    background-color: #00aff0;
-    border: 1px solid black; }
+    display: inline-block;
+    width: 10em; }
+    .ui-tabs-nav li:not(.ui-tabs-active) a {
+      background-color: #00658a; }
+    .ui-tabs-nav li.ui-tabs-active:after {
+      content: "";
+      display: block;
+      margin: 0 auto;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #00aff0; }
     .ui-tabs-nav li a {
       display: block;
-      padding: 20px;
+      padding: 5px 10px;
       text-decoration: none;
-      color: white; }
+      color: white;
+      background-color: #00aff0; }
 
-#comments {
+#group, #individuals {
+  background-color: #e6e5e0;
+  padding-top: 45px; }
+
+#group .main-stats {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px; }
+  #group .main-stats div {
+    font-size: 1.7em;
+    margin-right: 10px;
+    text-align: center;
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
+    #group .main-stats div img {
+      max-width: 1.1em;
+      max-height: 1.1em;
+      vertical-align: middle; }
+    #group .main-stats div img, #group .main-stats div i {
+      margin-right: 5px; }
+    #group .main-stats div h4 {
+      font-size: 0.8em;
+      margin-bottom: 5px; }
+#group #comments {
   margin: 20px; }
-  #comments ul {
-    list-style-type: none;
-    padding: 0px; }
-    #comments ul li {
-      padding: 20px;
-      border-radius: 3px;
-      display: table;
-      margin: 0 auto 10px auto; }
-      #comments ul li * {
-        display: inline-block;
-        vertical-align: middle; }
-      #comments ul li .prefix {
-        font-size: 2em;
-        margin-right: 20px; }
-        #comments ul li .prefix .gold {
-          max-width: 150px;
-          max-height: 150px; }
-        #comments ul li .prefix .silver {
-          max-width: 100px;
-          max-height: 100px; }
-        #comments ul li .prefix .bronze {
-          max-width: 50px;
-          max-height: 50px; }
-      #comments ul li .content img {
-        max-width: 200px;
-        max-height: 200px;
-        display: inline-block; }
-      #comments ul li .content .author {
-        display: block;
-        text-align: right;
-        margin-right: 10px; }
 
 #individuals .members {
-  margin: 20px; }
+  padding: 20px; }
   #individuals .members .detail-button {
     -webkit-appearance: none;
-    border: 1px solid #00658a;
     border-radius: 3px;
     background-color: white;
     font-size: 1.2em;
-    color: white;
-    background-color: #00aff0; }
+    color: white; }
 #individuals #detail > img {
   max-width: 150px;
   max-height: 150px;

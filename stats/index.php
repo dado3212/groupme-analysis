@@ -101,20 +101,32 @@
 			<div id="group">
 				<div class="main-stats">
 					<div>
-						<img src="../assets/groupme.png" />
-						<?php echo number_format($info['total']['comments']) . " comments"; ?>
+						<h4>
+							<i class="fa fa-user" aria-hidden="true"></i>
+							Members
+						</h4>
+						<?php echo number_format(count($info['individuals']) - 1); ?>
 					</div>
 					<div>
-						<i class="fa fa-book" aria-hidden="true"></i>
-						<?php echo number_format($info['total']['words']) . " words"; ?>
+						<h4>
+							<img src="../assets/groupme.png" />
+							Comments
+						</h4>
+						<?php echo number_format($info['total']['comments']); ?>
 					</div>
 					<div>
-						<img src="../assets/heart.png" />
-						<?php echo number_format($info['total']['likes']) . " likes"; ?>
+						<h4>
+							<i class="fa fa-book" aria-hidden="true"></i>
+							Words
+						</h4>
+						<?php echo number_format($info['total']['words']); ?>
 					</div>
 					<div>
-						<i class="fa fa-user" aria-hidden="true"></i>
-						<?php echo number_format(count($info['individuals']) - 1) . " members"; ?>
+						<h4>
+							<img src="../assets/heart.png" />
+							Likes
+						</h4>
+						<?php echo number_format($info['total']['likes']); ?>
 					</div>
 				</div>
 				<div id="comments">
@@ -126,7 +138,8 @@
 						<li>
 							<div class="prefix">
 							<?php
-								if ($i == 0) {
+								echo $i + 1;
+								/*if ($i == 0) {
 									echo "<img class='gold' src='../assets/gold.png' />";
 								} else if ($i == 1) {
 									echo "<img class='silver' src='../assets/silver.png' />";
@@ -134,7 +147,7 @@
 									echo "<img class='bronze' src='../assets/bronze.png' />";
 								} else {
 									echo $i + 1;
-								}
+								}*/
 							?>
 							</div>
 							<div class="content">

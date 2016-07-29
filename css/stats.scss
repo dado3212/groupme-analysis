@@ -1,6 +1,6 @@
-$main-color: #00aff0;
+$background: #e6e5e0;
+$blue: #00aff0;
 $text-color: #484c55;
-$background-color: #f8f8f8;
 
 $highlight-color: #77c32f;
 
@@ -15,11 +15,15 @@ html, body {
 
 	box-sizing: content-box;
 
-	background-color: $background-color;
+	background-color: white;
+}
+
+h1, h3, h4, h6 {
+	margin: 0px;
+	padding: 0px;
 }
 
 h1, h3, h6 {
-	margin: 0px;
 	padding: 20px 0 0 0;
 
 	font-weight: 600;
@@ -27,131 +31,111 @@ h1, h3, h6 {
 }
 
 h3 {
-	padding: 0px;
 	font-weight: 400;
 }
 
-h6 {
-	padding: 0 0 20px 0;
-}
-
-.main-stats {
-	text-align: center;
-	margin-bottom: 10px;
-
-	div {
-		font-size: 1.4em;
-
-		img {
-			max-width: 1.1em;
-			max-height: 1.1em;
-
-			vertical-align: middle;
-		}
-
-		img, i {
-			margin-right: 5px;
-		}
-	}
+input, button, a {
+	outline: none;
 }
 
 .ui-tabs-nav {
 	list-style-type: none;
-	display: flex;
-	margin: 0;
-	padding: 0;
+	display: table;
+
+	margin: 0 auto;
+	padding: 10px;
+
+	position: relative;
+	top: 35px;
+
+	background-color: $background;
 
 	li {
-		flex: 1;
-		margin: 0 10px;
 		text-align: center;
+		display: inline-block;
 
-		border-radius: 5px;
-		background-color: $main-color;
-		border: 1px solid black;
+		width: 10em;
+
+		&:not(.ui-tabs-active) a {
+			background-color: darken($blue, 20%);
+		}
+
+		&.ui-tabs-active:after {
+			content: "";
+			display: block;
+			margin: 0 auto;
+			width: 0;
+			height: 0;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-top: 10px solid $blue;
+		}
 
 		a {
 			display: block;
-			padding: 20px;
+			padding: 5px 10px;
 			text-decoration: none;
 			color: white;
+			background-color: $blue;
 		}
 	}
 }
 
-#comments {
-	margin: 20px;
+#group, #individuals {
+	background-color: $background;
+	padding-top: 45px;
+}
 
-	ul {
-		list-style-type: none;
-		padding: 0px;
+#group {
+	.main-stats {
+		display: flex;
+		justify-content: center;
 
-		li {
-			// background-color: white;
-			padding: 20px;
-			border-radius: 3px;
-			// box-shadow: 0 0 3px;
+		margin-bottom: 10px;
 
-			display: table;
-			margin: 0 auto 10px auto;
+		div {
+			font-size: 1.7em;
+			margin-right: 10px;
+			text-align: center;
 
-			* {
-				display: inline-block;
+			background-color: white;
+			padding: 10px 20px;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+			img {
+				max-width: 1.1em;
+				max-height: 1.1em;
 
 				vertical-align: middle;
 			}
 
-			.prefix {
-				font-size: 2em;
-				margin-right: 20px;
-
-				.gold {
-					max-width: 150px;
-					max-height: 150px;
-				}
-
-				.silver {
-					max-width: 100px;
-					max-height: 100px;
-				}
-
-				.bronze {
-					max-width: 50px;
-					max-height: 50px;
-				}
+			img, i {
+				margin-right: 5px;
 			}
 
-			.content {
-				img {
-					max-width: 200px;
-					max-height: 200px;
-
-					display: inline-block;
-				}
-
-				.author {
-					display: block;
-					text-align: right;
-					margin-right: 10px;
-				}
+			h4 {
+				font-size: 0.8em;
+				margin-bottom: 5px;
 			}
 		}
+	}
+
+	#comments {
+		margin: 20px;
 	}
 }
 
 #individuals {
 	.members {
-		margin: 20px;
+		padding: 20px;
 
 		.detail-button {
 			-webkit-appearance: none;
-			border: 1px solid darken($main-color, 20%);
 			border-radius: 3px;
 			background-color: white;
 
 			font-size: 1.2em;
 			color: white;
-			background-color: $main-color;
 		}
 	}
 
