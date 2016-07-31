@@ -6,6 +6,11 @@
 <html lang="en">
 	<head>
 		<title>Groupme Analysis</title>
+		<?php
+			if (preg_match("/(iPhone|iPod|iPad|Android|BlackBerry|Mobile)/i", $_SERVER['HTTP_USER_AGENT'])) {
+				?><meta name="viewport" content="width=500"><?php
+			}
+		?>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
@@ -37,7 +42,7 @@
 						<div>
 							Use the phone number:
 							<div class="well">
-								+1 619-432-4317
+								619-432-4317
 							</div>
 							and click 'Add new phone number'
 							<img src="assets/add1.jpg" />

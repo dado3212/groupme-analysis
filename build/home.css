@@ -59,7 +59,8 @@ header {
   justify-content: space-around;
   align-items: center; }
   .cta h1 {
-    margin: 0px; }
+    margin: 0px;
+    text-align: center; }
 
 .steps ul {
   list-style-type: none;

@@ -22,16 +22,24 @@ html, body {
 	}
 }
 
-h1, h3, h4, h6 {
+h1, h2, h3, h4, h6 {
 	margin: 0px;
 	padding: 0px;
+
+	text-align: center;
 }
 
-h1, h3, h6 {
+h1 {
 	padding: 20px 0 0 0;
 
 	font-weight: 600;
 	text-align: center;
+}
+
+h2 {
+	font-weight: 500;
+	background-color: white;
+	padding: 15px 0;
 }
 
 h3 {
@@ -125,7 +133,7 @@ input, button, a {
 	}
 
 	#comments {
-		padding: 20px;
+		padding: 20px 20px 40px 20px;
 
 		ul {
 			list-style-type: none;
@@ -140,7 +148,7 @@ input, button, a {
 				padding: 10px 20px;
 				transition: box-shadow 0.1s ease;
 
-				&:nth-child(2n) {
+				&:nth-child(2n+1) {
 					background-color: darken(white, 5%);
 				}
 

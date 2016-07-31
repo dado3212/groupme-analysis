@@ -13,9 +13,10 @@
 
 			$PDO = createConnection();
 
-			$stmt = $PDO->prepare("INSERT INTO groups (name, password, data) VALUES (:name, :password, :data)");
+			$stmt = $PDO->prepare("INSERT INTO groups (name, password, group_id, data) VALUES (:name, :password, :group_id, :data)");
 			$stmt->bindValue(":name", $_POST['name'], PDO::PARAM_STR);
 			$stmt->bindValue(":password", $password, PDO::PARAM_STR);
+			$stmt->bindValue(":group_id", $group, PDO::PARAM_STR);
 			$stmt->bindValue(":data", json_encode($analysis), PDO::PARAM_STR);
 
 			$stmt->execute();

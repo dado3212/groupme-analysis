@@ -131,6 +131,7 @@
 				</div>
 				<div id="comments">
 					<ul>
+						<h2>Best Comments</h2>
 					<?php for ($i = 0; $i < count($info['total']['popular']); $i++) {
 						$post = $info['total']['popular'][$i];
 						$author = ($post["sender_type"] == "user") ? $info["individuals"][$post["sender_id"]]["name"] : "<code>System</code>";
