@@ -153,17 +153,18 @@ input, button, a {
     #individuals .all .people > div {
       text-overflow: ellipsis;
       overflow: hidden;
-      padding: 5px;
-      cursor: pointer;
-      margin: 1px 1px 1px 0; }
+      padding: 6px 6px 6px 5px;
+      margin-right: 1px;
+      cursor: pointer; }
       #individuals .all .people > div.active {
         background-color: white;
-        padding-right: 6px;
-        margin: 0; }
-        #individuals .all .people > div.active:not(:first-child) {
-          border-top: 1px solid rgba(0, 0, 0, 0.3); }
-        #individuals .all .people > div.active:not(:last-child) {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
+        padding: 5px 7px 5px 5px;
+        margin: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
+        #individuals .all .people > div.active:first-child {
+          border-top: none;
+          padding-top: 6px; }
       #individuals .all .people > div:not(.active):hover {
         background-color: #f2f2f2; }
     #individuals .all .people .profile {
