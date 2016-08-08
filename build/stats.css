@@ -41,6 +41,7 @@ input, button, a {
   .ui-tabs-nav li {
     text-align: center;
     display: inline-block;
+    outline: none;
     width: 10em; }
     .ui-tabs-nav li:not(.ui-tabs-active) a {
       background-color: #00658a; }
@@ -62,7 +63,8 @@ input, button, a {
 
 #group, #individuals {
   background-color: #e6e5e0;
-  padding-top: 45px; }
+  padding-top: 45px;
+  padding-bottom: 30px; }
 
 #group .main-stats {
   display: flex;
@@ -85,7 +87,7 @@ input, button, a {
       font-size: 0.8em;
       margin-bottom: 5px; }
 #group #comments {
-  padding: 20px 20px 40px 20px; }
+  padding: 20px; }
   #group #comments ul {
     list-style-type: none;
     margin: 0 auto;
@@ -116,7 +118,8 @@ input, button, a {
           height: 3em;
           border-radius: 50%;
           background-position: center;
-          background-size: contain;
+          background-size: cover;
+          background-repeat: no-repeat;
           margin-right: 10px; }
         #group #comments ul li .top .likes {
           font-size: 0.8em;
@@ -131,21 +134,103 @@ input, button, a {
         max-width: 200px;
         max-height: 200px; }
 
-#individuals .members {
-  padding: 20px; }
-  #individuals .members .detail-button {
-    -webkit-appearance: none;
-    border-radius: 3px;
-    background-color: white;
-    font-size: 1.2em;
-    color: white; }
-#individuals #detail > img {
-  max-width: 150px;
-  max-height: 150px;
-  display: block;
-  margin: auto;
-  border-radius: 50%; }
-#individuals #detail svg > rect {
-  fill: transparent !important; }
+#individuals .all {
+  max-width: 50em;
+  display: flex;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
+  #individuals .all .people {
+    text-align: center;
+    min-width: 5em;
+    max-width: 5em;
+    background-color: rgba(0, 0, 0, 0.1);
+    max-height: 55em;
+    overflow-y: scroll;
+    position: relative;
+    z-index: 1;
+    margin-right: -1px; }
+    #individuals .all .people > div {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding: 5px;
+      cursor: pointer;
+      margin: 1px 1px 1px 0; }
+      #individuals .all .people > div.active {
+        background-color: white;
+        padding-right: 6px;
+        margin: 0; }
+        #individuals .all .people > div.active:not(:first-child) {
+          border-top: 1px solid rgba(0, 0, 0, 0.3); }
+        #individuals .all .people > div.active:not(:last-child) {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
+      #individuals .all .people > div:not(.active):hover {
+        background-color: #f2f2f2; }
+    #individuals .all .people .profile {
+      display: block;
+      margin: 0 auto;
+      width: 3em;
+      height: 3em;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat; }
+  #individuals .all .detail {
+    flex: 1;
+    padding: 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.3); }
+    #individuals .all .detail .main-stats {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px; }
+      #individuals .all .detail .main-stats div {
+        font-size: 1.4em;
+        text-align: center;
+        margin: 0 5px;
+        background-color: white;
+        padding: 5px 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
+        #individuals .all .detail .main-stats div img {
+          max-width: 1.1em;
+          max-height: 1.1em;
+          vertical-align: middle; }
+        #individuals .all .detail .main-stats div img, #individuals .all .detail .main-stats div i {
+          margin-right: 5px; }
+        #individuals .all .detail .main-stats div h4 {
+          font-size: 0.6em;
+          margin-bottom: 5px; }
+    #individuals .all .detail .secondary-stats {
+      display: flex;
+      justify-content: space-around; }
+      #individuals .all .detail .secondary-stats .sharer, #individuals .all .detail .secondary-stats .liker {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px; }
+      #individuals .all .detail .secondary-stats h4 {
+        margin-bottom: 10px; }
+      #individuals .all .detail .secondary-stats .profile {
+        display: inline-block;
+        min-width: 3em;
+        min-height: 3em;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-right: 10px; }
+      #individuals .all .detail .secondary-stats .number {
+        margin-left: auto;
+        padding-left: 10px;
+        font-weight: bold; }
+    #individuals .all .detail .image {
+      display: block;
+      margin: 0 auto 10px auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat; }
+    #individuals .all .detail svg > rect {
+      fill: transparent !important; }
 
 /*# sourceMappingURL=stats.css.map */

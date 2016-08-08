@@ -5,10 +5,10 @@
 	if (!defined('API')) {
 		die('Direct access not permitted.');
 	}
-	// define('API', true);
+	//define('API', true);
 	require_once('secret.php');
 
-	// echo "<pre>" . print_r(analyze("16897222"), true) . "</pre>";
+	//echo "<pre>" . print_r(analyze("23376041"), true) . "</pre>";
 
 	/**
 	 * Attempts to find the group in which it has a given name
@@ -83,18 +83,30 @@
 						$members[$poster]["best_comment"] = $message;
 					}
 
+					// Get those who like you
+					foreach ($message["likes"] as $lover) {
+						if (array_key_exists($lover, $members[$poster]["loved"])) {
+							$members[$poster]["loved"][$lover] += 1;
+						} else {
+							$members[$poster]["loved"][$lover] = 1;
+						}
+					}
+
 					// Increment likes given
 					for ($i = 0; $i < count($message["likes"]); $i++) {
+						// The specific current liker
 						$liker = $message["likes"][$i];
-						$others = $message["likes"];
 
+						// Everyone else who liked
+						$others = $message["likes"];
 						unset($others[$i]);
 
+						// Get those who like the same stuff as you
 						foreach ($others as $other) {
-							if (array_key_exists($other, $members[$poster]["shared"])) {
-								$members[$poster]["shared"][$other] += 1;
+							if (array_key_exists($other, $members[$liker]["shared"])) {
+								$members[$liker]["shared"][$other] += 1;
 							} else {
-								$members[$poster]["shared"][$other] = 1;
+								$members[$liker]["shared"][$other] = 1;
 							}
 						}
 
@@ -145,6 +157,11 @@
 			arsort($shared);
 
 			$members[$key]["shared"] = array_slice($shared, 0, 3, true);
+
+			$loved = $member["loved"];
+			arsort($loved);
+
+			$members[$key]["loved"] = array_slice($loved, 0, 3, true);
 		}
 
 		return [
@@ -179,44 +196,48 @@
 		$members = [];
 
 		foreach ($rawMembers as $member) {
-			$members[$member['user_id']] = [
-				'name' => $member['nickname'],
-				'image' => $member['image_url'],
-				'total_likes_received' => 0,
-				'total_likes_given' => 0,
-				'total_number' => 0,
-				'self_likes' => 0,
-				'total_words' => 0,
-				'max_likes' => 0,
-				'best_comment' => '',
-				'shared' => [],
-				'times' => [
-					0 => 0,
-					1 => 0,
-					2 => 0,
-					3 => 0,
-					4 => 0,
-					5 => 0,
-					6 => 0,
-					7 => 0,
-					8 => 0,
-					9 => 0,
-					10 => 0,
-					11 => 0,
-					12 => 0,
-					13 => 0,
-					14 => 0,
-					15 => 0,
-					16 => 0,
-					17 => 0,
-					18 => 0,
-					19 => 0,
-					20 => 0,
-					21 => 0,
-					22 => 0,
-					23 => 0,
-				],
-			];
+			if ($member['user_id'] != $ME) {
+				$members[$member['user_id']] = [
+					'name' => $member['nickname'],
+					'image' => $member['image_url'],
+					'id' => $member['user_id'],
+					'total_likes_received' => 0,
+					'total_likes_given' => 0,
+					'total_number' => 0,
+					'self_likes' => 0,
+					'total_words' => 0,
+					'max_likes' => 0,
+					'best_comment' => '',
+					'shared' => [],
+					'loved' => [],
+					'times' => [
+						0 => 0,
+						1 => 0,
+						2 => 0,
+						3 => 0,
+						4 => 0,
+						5 => 0,
+						6 => 0,
+						7 => 0,
+						8 => 0,
+						9 => 0,
+						10 => 0,
+						11 => 0,
+						12 => 0,
+						13 => 0,
+						14 => 0,
+						15 => 0,
+						16 => 0,
+						17 => 0,
+						18 => 0,
+						19 => 0,
+						20 => 0,
+						21 => 0,
+						22 => 0,
+						23 => 0,
+					],
+				];
+			}
 		}
 
 		return $members;

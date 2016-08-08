@@ -20,6 +20,10 @@
 	$names = $info["total"]["names"];
 	$topics = $info["total"]["topics"];
 
+	$people = $info["individuals"];
+
+	usort($people, function($a, $b) { return $a["name"] > $b["name"]; });
+
 	usort($names, function($a, $b) { return $a["time"] < $b["time"]; });
 	usort($topics, function($a, $b) { return $a["time"] < $b["time"]; });
 ?>
@@ -55,7 +59,8 @@
 
 				var options = {
 					title: name + '\'s Activity by Time',
-					height: 450,
+					height: 300,
+					width: 700,
 					hAxis: {
 						format: 'ha',
 						viewWindow: {
@@ -72,11 +77,9 @@
 				chart.draw(data, options);
 			}
 
-			// Instantiate each individual's object
+			// Instantiate dump
 			<?php
-				for ($i = 0; $i < count($info["individuals"]); $i++) {
-					echo "var person$i = " . json_encode(array_slice($info["individuals"], $i, 1)[0]) . ";\n";
-				}
+				echo "var people = " . json_encode($people) . ";\n";
 			?>
 		</script>
 
@@ -84,7 +87,7 @@
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript">
 		  google.charts.load('current', {packages: ['corechart']});
-		  google.charts.setOnLoadCallback(function(){ changePerson(person0); });
+		  google.charts.setOnLoadCallback(function(){ changePerson(people[0], null); });
 		</script>
 	</head>
 	<body>
@@ -162,68 +165,69 @@
 				</div>
 			</div>
 			<div id="individuals">
-				<div class="members">
-					<table id="members" class="display">
-						<thead>
-							<tr>
-								<th>User</th>
-								<th>Comments</th>
-								<th>Words</th>
-								<th>Likes Received</th>
-								<th>Likes Given</th>
-								<th>Likes Given/Likes Received</th>
-								<th>Likes Received/Comment</th>
-								<th>Self Likes</th>
-								<th>Best Comment</th>
-								<th>Details</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php for ($i = 0; $i < count($info["individuals"]); $i++) {
-								$member = array_slice($info["individuals"], $i, 1)[0];
-							 ?>
-							<tr>
-								<td><?php echo $member["name"]; ?></td>
-								<td><?php echo number_format($member["total_number"]); ?></td>
-								<td><?php echo number_format($member["total_words"]); ?></td>
-								<td><?php echo number_format($member["total_likes_received"]); ?></td>
-								<td><?php echo number_format($member["total_likes_given"]); ?></td>
-								<td><?php echo ($member["total_likes_received"] > 0) ? round($member["total_likes_given"]/$member["total_likes_received"], 2) : 0; ?></td>
-								<td><?php echo ($member["total_number"] > 0) ? round($member["total_likes_received"]/$member["total_number"], 2) : 0; ?></td>
-								<td><?php echo $member["self_likes"]; ?></td>
-								<td><?php echo $member["best_comment"] ? $member["best_comment"]["text"] . " (<span>" . $member["max_likes"] . "</span> likes)" : "No liked comments. :( <span style='display: none;'>0</span>"; ?></td>
-								<td><?php echo "<button class='detail-button' onclick=\"changePerson(person$i)\">Details</button>"; ?></td>
-							</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
-				<div id="detail">
-					<h1></h1>
-					<img src="" />
-					<div class="main-stats">
-						<div class="comments">
-							<img src="../assets/groupme.png" />
-							<span></span>
+				<div class="all">
+					<div class="people">
+					<?php
+						for ($i = 0; $i < count($people); $i++) {
+							$person = $people[$i]; ?>
+							<div <?php if ($i == 0) echo "class='active'"; ?> onclick="changePerson(people[<?php echo $i; ?>], this)">
+								<div class="profile" style="background-image: url(<?php echo $person['image']; ?>)"></div>
+								<span><?php echo $person['name']; ?></span>
+							</div>
+						<?php }
+					?>
+					</div>
+					<div class="detail">
+						<h1></h1>
+						<div class="image">
 						</div>
-						<div class="words">
-							<i class="fa fa-book" aria-hidden="true"></i>
-							<span></span>
+						<div class="main-stats">
+							<div class="comments">
+								<h4>
+									<img src="../assets/groupme.png" />
+									Comments
+								</h4>
+								<span></span>
+							</div>
+							<div class="words">
+								<h4>
+									<i class="fa fa-book" aria-hidden="true"></i>
+									Words
+								</h4>
+								<span></span>
+							</div>
+							<div class="likes-received">
+								<h4>
+									<img src="../assets/heart.png" />
+									Likes Received
+								</h4>
+								<span></span>
+							</div>
+							<div class="likes-given">
+								<h4>
+									<img src="../assets/shared.png" />
+									Likes Given
+								</h4>
+								<span></span>
+							</div>
+							<div class="self-likes">
+								<h4>
+									<img src="../assets/smiley.png" />
+									Self Likes
+								</h4>
+								<span></span>
+							</div>
 						</div>
-						<div class="likes-received">
-							<img src="../assets/heart.png" />
-							<span></span>
-						</div>
-						<div class="likes-given">
-							<img src="../assets/shared.png" />
-							<span></span>
-						</div>
-						<div class="self-likes">
-							<img src="../assets/smiley.png" />
-							<span></span>
+						<div id="histogram"></div>
+						<div class="secondary-stats">
+							<div class="shared">
+							</div>
+							<div class="loved">
+							</div>
 						</div>
 					</div>
-					<div id="histogram"></div>
+					<div class="sort">
+					</div>
 				</div>
 			</div>
 		</div>
