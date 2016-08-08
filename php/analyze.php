@@ -30,20 +30,20 @@
 			$response = [
 				"response" => "success",
 				"code" => 3,
-				"message" => "Check group for link!",
+				"message" => "Successfully analyzed! Check group for link.",
 			];
 		} else {
 			$response = [
 				"response" => "error",
 				"code" => 1,
-				"message" => "Not added.",
+				"message" => "Group not found.  Make sure the name of the added member matches exactly, along with the phone #.",
 			];
 		}
 	} else {
 		$response = [
 			"response" => "error",
 			"code" => 2,
-			"message" => "Invalid name.",
+			"message" => "Invalid name.  Please contact site admin.",
 		];
 	}
 

@@ -16,6 +16,7 @@ html, body {
 
 	box-sizing: border-box;
 	height: 100%;
+	min-height: 100%;
 
 	* {
 		box-sizing: border-box;
@@ -48,6 +49,10 @@ h3 {
 
 input, button, a {
 	outline: none;
+}
+
+header {
+	height: 120px;
 }
 
 .ui-tabs-nav {
@@ -93,6 +98,10 @@ input, button, a {
 			background-color: $blue;
 		}
 	}
+}
+
+#tabs {
+	height: calc(100% - 180px);
 }
 
 #group, #individuals {
@@ -213,6 +222,8 @@ input, button, a {
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
+
+	min-height: 100%;
 
 	.all {
 		display: flex;
@@ -379,6 +390,7 @@ input, button, a {
 
 		h3 {
 			margin: 5px auto;
+			font-weight: 600;
 		}
 
 		.type {
@@ -392,6 +404,10 @@ input, button, a {
 
 			&:hover {
 				background-color: rgba(0, 0, 0, 0.1);
+			}
+
+			span {
+				font-weight: bold;
 			}
 		}
 	}

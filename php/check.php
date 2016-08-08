@@ -11,20 +11,20 @@
 			$response = [
 				"response" => "success",
 				"code" => 3,
-				"message" => json_encode(["group" => $group]),
+				"message" => "",
 			];
 		} else {
 			$response = [
 				"response" => "error",
 				"code" => 1,
-				"message" => "Not added.",
+				"message" => "Group not found.  Make sure the name of the added member matches exactly, along with the phone #.",
 			];
 		}
 	} else {
 		$response = [
 			"response" => "error",
 			"code" => 2,
-			"message" => "Invalid name.",
+			"message" => "Invalid name.  Please contact site admin.",
 		];
 	}
 

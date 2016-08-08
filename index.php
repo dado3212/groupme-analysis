@@ -57,11 +57,13 @@
 							<div class="well">
 								<?php echo $name; ?>
 							</div>
+							and uncheck 'Save to your Address Book'
 							<img src="assets/add2.jpg" />
 						</div>
 					</li>
 					<li>
 						<h3>Step 4</h3>
+						<span id="alert"></span>
 						<div>
 							Click this button once the user has been added to the group!
 							<button type="submit" id="added" data-name="<?php echo $name; ?>">Added!</button>

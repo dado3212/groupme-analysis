@@ -5,6 +5,7 @@
 	define('API', TRUE);
 	include_once('../php/groupme.php');
 
+	// Pull information from database (analyze step)
 	$PDO = createConnection();
 
 	$stmt = $PDO->prepare("SELECT * FROM groups WHERE name=:name AND password=:password");
@@ -31,6 +32,12 @@
 <html lang="en">
 	<head>
 		<title><?php echo "Groupme Analysis | {$names[0]['name']}"; ?></title>
+		<?php
+			// Respect request desktop
+			if (preg_match("/(iPhone|iPod|iPad|Android|BlackBerry|Mobile)/i", $_SERVER['HTTP_USER_AGENT'])) {
+				?><meta name="viewport" content="width=600"><?php
+			}
+		?>
 
 		<!-- Font Awesome -->
 		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -40,10 +47,6 @@
 
 		<!-- jQuery Widgets -->
 		<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-
-		<!-- DataTables -->
-		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
-		<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
 		<!-- Custom -->
 		<link type="text/css" rel="stylesheet" href="../build/stats.css">
@@ -60,7 +63,6 @@
 				var options = {
 					title: name + '\'s Activity by Time',
 					height: 300,
-					width: 700,
 					hAxis: {
 						format: 'ha',
 						viewWindow: {
@@ -77,7 +79,7 @@
 				chart.draw(data, options);
 			}
 
-			// Instantiate dump
+			// Dump of all people
 			<?php
 				echo "var people = " . json_encode($people) . ";\n";
 			?>
@@ -256,6 +258,5 @@
 				</div>
 			</div>
 		</div>
-		<?php // echo "<pre>" . print_r($info, true) . "</pre>"; ?>
 	</body>
 </html>

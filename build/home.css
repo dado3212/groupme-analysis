@@ -51,6 +51,13 @@ header {
     margin: 0 auto;
     max-width: 400px; }
 
+#alert {
+  padding: 10px; }
+  #alert.success {
+    background-color: #daf3cc; }
+  #alert.error {
+    background-color: #f9c4c4; }
+
 .cta {
   background-color: #e6e5e0;
   height: 400px;
@@ -64,7 +71,7 @@ header {
 
 .steps ul {
   list-style-type: none;
-  padding: 30px 0 0 0;
+  padding: 30px 0 1px 0;
   max-width: 50em;
   margin: 0 auto; }
   .steps ul .row {

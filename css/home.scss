@@ -79,6 +79,18 @@ header {
 	}
 }
 
+#alert {
+	padding: 10px;
+
+	&.success {
+		background-color: lighten(#4E9A26, 50%);
+	}
+
+	&.error {
+		background-color: lighten(#AC1212, 50%);
+	}
+}
+
 .cta {
 	background-color: $background;
 	height: 400px;
@@ -97,7 +109,7 @@ header {
 .steps {
 	ul {
 		list-style-type: none;
-		padding: 30px 0 0 0;
+		padding: 30px 0 1px 0;
 
 		max-width: 50em;
 		margin: 0 auto;
