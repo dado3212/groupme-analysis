@@ -36,6 +36,71 @@ $(document).ready(function() {
     ]
   });
 
+  // Sorting handling
+  var sort = "name";
+  var ascending = true;
+  var sort_function;
+
+  $("#sort .type").on('click', function() {
+    // Stores current sort order
+    if (sort == $(this).data('sort')) {
+      ascending = !ascending;
+    } else {
+      ascending = true;
+    }
+    sort = $(this).data('sort');
+
+    // Change sort indicator
+    $("#sort span").html('');
+    if (ascending) {
+      $(this).find("span").html('↑');
+    } else {
+      $(this).find("span").html('↓');
+    }
+
+    // Handle custom sort functions
+    if (sort == "name") {
+      sort_function = function(a,b) {
+        return (ascending ? -1 : 1) * (people[b]["name"].localeCompare(people[a]["name"]))
+      };
+    } else if (sort == "comments") {
+      sort_function = function(a,b) {
+        return (ascending ? -1 : 1) * (people[a]["total_number"] - people[b]["total_number"])
+      };
+    } else if (sort == "words") {
+      sort_function = function(a,b) {
+        return (ascending ? -1 : 1) * (people[a]["total_words"] - people[b]["total_words"])
+      };
+    } else if (sort == "likes_received") {
+      sort_function = function(a,b) {
+        return (ascending ? -1 : 1) * (people[a]["total_likes_received"] - people[b]["total_likes_received"])
+      };
+    } else if (sort == "likes_given") {
+      sort_function = function(a,b) {
+        return (ascending ? -1 : 1) * (people[a]["total_likes_given"] - people[b]["total_likes_given"])
+      };
+    } else if (sort == "self_likes") {
+      sort_function = function(a,b) {
+        return (ascending ? -1 : 1) * (people[a]["self_likes"] - people[b]["self_likes"])
+      };
+    }
+
+    // Gets current active person
+    var active = $(".people .active").data('id');
+
+    // Sorts accordingly
+    var people_sorted = Object.keys(people).sort(sort_function);
+
+    // Repopulates with sorted
+    $(".people").html('');
+    for (var key of people_sorted) {
+      $(".people").append("<div data-id='" + key + "' onclick='changePerson(people[" + key + "], this)'><div class='profile' style='background-image: url(" + people[key].image + ")'></div><span>" + people[key].name + "</span></div>");
+    }
+
+    // Reactivates in sidebar
+    $(".people div[data-id=" + active + "]").addClass('active');
+  });
+
   // Update individual details
   changePerson = function (person, me) {
     // Change highlighted

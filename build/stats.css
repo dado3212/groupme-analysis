@@ -134,104 +134,124 @@ input, button, a {
         max-width: 200px;
         max-height: 200px; }
 
-#individuals .all {
-  max-width: 50em;
+#individuals {
   display: flex;
-  margin: 0 auto;
-  background-color: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
-  #individuals .all .people {
-    text-align: center;
-    min-width: 5em;
-    max-width: 5em;
-    background-color: rgba(0, 0, 0, 0.1);
-    max-height: 55em;
-    overflow-y: scroll;
-    position: relative;
-    z-index: 1;
-    margin-right: -1px; }
-    #individuals .all .people > div {
-      text-overflow: ellipsis;
-      overflow: hidden;
-      padding: 6px 6px 6px 5px;
-      margin-right: 1px;
-      cursor: pointer; }
-      #individuals .all .people > div.active {
-        background-color: white;
-        padding: 5px 7px 5px 5px;
-        margin: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.3);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
-        #individuals .all .people > div.active:first-child {
-          border-top: none;
-          padding-top: 6px; }
-      #individuals .all .people > div:not(.active):hover {
-        background-color: #f2f2f2; }
-    #individuals .all .people .profile {
-      display: block;
-      margin: 0 auto;
-      width: 3em;
-      height: 3em;
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat; }
-  #individuals .all .detail {
-    flex: 1;
-    padding: 10px;
-    border-left: 1px solid rgba(0, 0, 0, 0.3); }
-    #individuals .all .detail .main-stats {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 10px; }
-      #individuals .all .detail .main-stats div {
-        font-size: 1.4em;
-        text-align: center;
-        margin: 0 5px;
-        background-color: white;
-        padding: 5px 10px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
-        #individuals .all .detail .main-stats div img {
-          max-width: 1.1em;
-          max-height: 1.1em;
-          vertical-align: middle; }
-        #individuals .all .detail .main-stats div img, #individuals .all .detail .main-stats div i {
-          margin-right: 5px; }
-        #individuals .all .detail .main-stats div h4 {
-          font-size: 0.6em;
-          margin-bottom: 5px; }
-    #individuals .all .detail .secondary-stats {
-      display: flex;
-      justify-content: space-around; }
-      #individuals .all .detail .secondary-stats .sharer, #individuals .all .detail .secondary-stats .liker {
-        display: flex;
-        align-items: center;
-        margin-bottom: 5px; }
-      #individuals .all .detail .secondary-stats h4 {
-        margin-bottom: 10px; }
-      #individuals .all .detail .secondary-stats .profile {
-        display: inline-block;
-        min-width: 3em;
-        min-height: 3em;
+  justify-content: center;
+  align-items: flex-start; }
+  #individuals .all {
+    display: flex;
+    max-width: 45em;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
+    #individuals .all .people {
+      text-align: center;
+      min-width: 5em;
+      max-width: 5em;
+      background-color: rgba(0, 0, 0, 0.1);
+      max-height: 55em;
+      overflow-y: scroll;
+      position: relative;
+      z-index: 1;
+      margin-right: -1px; }
+      #individuals .all .people > div {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding: 6px 6px 6px 5px;
+        margin-right: 1px;
+        cursor: pointer; }
+        #individuals .all .people > div.active {
+          background-color: white;
+          padding: 5px 7px 5px 5px;
+          margin: 0;
+          border-top: 1px solid rgba(0, 0, 0, 0.3);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
+          #individuals .all .people > div.active:first-child {
+            border-top: none;
+            padding-top: 6px; }
+        #individuals .all .people > div:not(.active):hover {
+          background-color: #f2f2f2; }
+      #individuals .all .people .profile {
+        display: block;
+        margin: 0 auto;
+        width: 3em;
+        height: 3em;
         border-radius: 50%;
         background-position: center;
         background-size: cover;
-        background-repeat: no-repeat;
-        margin-right: 10px; }
-      #individuals .all .detail .secondary-stats .number {
-        margin-left: auto;
-        padding-left: 10px;
-        font-weight: bold; }
-    #individuals .all .detail .image {
-      display: block;
-      margin: 0 auto 10px auto;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat; }
-    #individuals .all .detail svg > rect {
-      fill: transparent !important; }
+        background-repeat: no-repeat; }
+    #individuals .all .detail {
+      flex: 1;
+      padding: 10px;
+      border-left: 1px solid rgba(0, 0, 0, 0.3); }
+      #individuals .all .detail h1 {
+        padding-top: 0px; }
+      #individuals .all .detail .main-stats {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px; }
+        #individuals .all .detail .main-stats div {
+          font-size: 1.4em;
+          text-align: center;
+          margin: 0 5px;
+          background-color: white;
+          padding: 5px 10px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
+          #individuals .all .detail .main-stats div img {
+            max-width: 1.1em;
+            max-height: 1.1em;
+            vertical-align: middle; }
+          #individuals .all .detail .main-stats div img, #individuals .all .detail .main-stats div i {
+            margin-right: 5px; }
+          #individuals .all .detail .main-stats div h4 {
+            font-size: 0.6em;
+            margin-bottom: 5px; }
+      #individuals .all .detail .secondary-stats {
+        display: flex;
+        justify-content: space-around; }
+        #individuals .all .detail .secondary-stats .sharer, #individuals .all .detail .secondary-stats .liker {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px; }
+        #individuals .all .detail .secondary-stats h4 {
+          margin-bottom: 10px; }
+        #individuals .all .detail .secondary-stats .profile {
+          display: inline-block;
+          min-width: 3em;
+          min-height: 3em;
+          border-radius: 50%;
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          margin-right: 10px; }
+        #individuals .all .detail .secondary-stats .number {
+          margin-left: auto;
+          padding-left: 10px;
+          font-weight: bold; }
+      #individuals .all .detail .image {
+        display: block;
+        margin: 0 auto 10px auto;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat; }
+      #individuals .all .detail svg > rect {
+        fill: transparent !important; }
+  #individuals #sort {
+    margin-left: 10px;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    width: 9em; }
+    #individuals #sort h3 {
+      margin: 5px auto; }
+    #individuals #sort .type {
+      border: none;
+      padding: 10px;
+      background-color: transparent;
+      transition: background-color 0.2s ease;
+      cursor: pointer; }
+      #individuals #sort .type:hover {
+        background-color: rgba(0, 0, 0, 0.1); }
 
 /*# sourceMappingURL=stats.css.map */

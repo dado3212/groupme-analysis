@@ -75,7 +75,7 @@
 					$members[$poster]["total_words"] += count(explode(" ", $message["text"]));
 
 					// Add to array of all posts and their times
-					$members[$poster]["times"][date('G',$message["time"])] += 1;
+					$members[$poster]["times"][date('G', $message["time"])] += 1;
 
 					// Check top comment
 					if (count($message["likes"]) > $members[$poster]["max_likes"]) {

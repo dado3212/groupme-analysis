@@ -210,11 +210,13 @@ input, button, a {
 }
 
 #individuals {
-	.all {
-		max-width: 50em;
-		display: flex;
-		margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
 
+	.all {
+		display: flex;
+		max-width: 45em;
 		background-color: white;
 		box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 
@@ -278,6 +280,10 @@ input, button, a {
 			flex: 1;
 			padding: 10px;
 			border-left: 1px solid rgba(0, 0, 0, 0.3);
+
+			h1 {
+				padding-top: 0px;
+			}
 
 			.main-stats {
 				display: flex;
@@ -360,6 +366,32 @@ input, button, a {
 
 			svg > rect {
 				fill: transparent !important;
+			}
+		}
+	}
+
+	#sort {
+		margin-left: 10px;
+		background-color: white;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+		width: 9em;
+
+		h3 {
+			margin: 5px auto;
+		}
+
+		.type {
+			border: none;
+			padding: 10px;
+			background-color: transparent;
+
+			transition: background-color 0.2s ease;
+
+			cursor: pointer;
+
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.1);
 			}
 		}
 	}

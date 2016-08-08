@@ -170,7 +170,7 @@
 					<?php
 						for ($i = 0; $i < count($people); $i++) {
 							$person = $people[$i]; ?>
-							<div <?php if ($i == 0) echo "class='active'"; ?> onclick="changePerson(people[<?php echo $i; ?>], this)">
+							<div data-id='<?php echo $i; ?>' <?php if ($i == 0) echo "class='active'"; ?> onclick="changePerson(people[<?php echo $i; ?>], this)">
 								<div class="profile" style="background-image: url(<?php echo $person['image']; ?>)"></div>
 								<span><?php echo $person['name']; ?></span>
 							</div>
@@ -226,7 +226,32 @@
 							</div>
 						</div>
 					</div>
-					<div class="sort">
+				</div>
+				<div id="sort">
+					<h3>Sort</h3>
+					<div class="type" data-sort="name">
+						Name
+						<span>↑</span>
+					</div>
+					<div class="type" data-sort="comments">
+						Comments
+						<span></span>
+					</div>
+					<div class="type" data-sort="words">
+						Words
+						<span></span>
+					</div>
+					<div class="type" data-sort="likes_received">
+						Likes Received
+						<span></span>
+					</div>
+					<div class="type" data-sort="likes_given">
+						Likes Given
+						<span></span>
+					</div>
+					<div class="type" data-sort="self_likes">
+						Self Likes
+						<span></span>
 					</div>
 				</div>
 			</div>
