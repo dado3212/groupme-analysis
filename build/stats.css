@@ -66,7 +66,8 @@ header {
       background-color: #00aff0; }
 
 #tabs {
-  height: calc(100% - 180px); }
+  height: calc(100% - 180px);
+  margin-top: -30px; }
 
 #group, #individuals {
   background-color: #e6e5e0;
@@ -75,12 +76,16 @@ header {
 
 #group .main-stats {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  max-width: 50em;
+  margin: 0 auto;
   margin-bottom: 10px; }
   #group .main-stats div {
     font-size: 1.7em;
-    margin-right: 10px;
+    margin: 5px;
     text-align: center;
+    flex-grow: 1;
     background-color: white;
     padding: 10px 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
@@ -169,8 +174,8 @@ header {
         cursor: pointer; }
         #individuals .all .people > div.active {
           background-color: white;
-          padding: 5px 7px 5px 5px;
-          margin: 0;
+          padding: 5px 8px 5px 5px;
+          margin-right: -1px;
           border-top: 1px solid rgba(0, 0, 0, 0.3);
           border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
           #individuals .all .people > div.active:first-child {
@@ -196,11 +201,14 @@ header {
       #individuals .all .detail .main-stats {
         display: flex;
         justify-content: center;
-        margin-bottom: 10px; }
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        max-width: 38em; }
         #individuals .all .detail .main-stats div {
           font-size: 1.4em;
           text-align: center;
-          margin: 0 5px;
+          margin: 5px;
+          flex-grow: 1;
           background-color: white;
           padding: 5px 10px;
           box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }

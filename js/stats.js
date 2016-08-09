@@ -112,6 +112,7 @@ $(document).ready(function() {
     }
 
     // Update histogram
+    chartOptions.title = person.name + '\'s Activity by Time';
     var data = person.times.map(function (num, time) {
       return [[time, 0, 0], num];
     });

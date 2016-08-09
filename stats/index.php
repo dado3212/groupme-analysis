@@ -35,7 +35,7 @@
 		<?php
 			// Respect request desktop
 			if (preg_match("/(iPhone|iPod|iPad|Android|BlackBerry|Mobile)/i", $_SERVER['HTTP_USER_AGENT'])) {
-				?><meta name="viewport" content="width=600"><?php
+				?><meta name="viewport" content="width=700"><?php
 			}
 		?>
 
