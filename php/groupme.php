@@ -1,6 +1,6 @@
 <?php
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
+	// error_reporting(E_ALL);
+	// ini_set('display_errors', 1);
 
 	if (!defined('API')) {
 		die('Direct access not permitted.');
@@ -21,6 +21,31 @@
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups?token=${TOKEN}&per_page=100");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$contents = curl_exec($ch);
+		curl_close($ch);
+
+		$groups = json_decode($contents, true)['response'];
+		foreach ($groups as $group) {
+			foreach ($group['members'] as $member) {
+				if ($member['user_id'] == $ME && $member['nickname'] == $name) {
+					return $group['group_id'];
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Attempts to find current group information (name, description, image, etc.)
+	 * @param $group The id of the group
+	 * @return the group id if successful, otherwise false
+	 */
+	function getCurrentGroupInfo($group) {
+		global $TOKEN;
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/${group}?token=${TOKEN}&per_page=100");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$contents = curl_exec($ch);
 		curl_close($ch);

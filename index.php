@@ -62,7 +62,7 @@
 					<li>
 						<h3>Step 1</h3>
 						<div>
-							Add user from menu.
+							Add user on Groupme to the group you want to analyze.
 							<img src="assets/images/add0.jpg" />
 						</div>
 					</li>

@@ -1,6 +1,6 @@
 <?php
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
+	//error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
 
 	define('API', TRUE);
 	include_once('../php/groupme.php');
@@ -211,7 +211,7 @@
 							</div>
 							<div class="content">
 								<?php
-								if (count($post["attachments"]) == 0)
+								if (count($post["attachments"]) == 0 || (count($post["attachments"]) > 0 && $post["attachments"][0]["type"] !== "image"))
 									echo "<div><q>" . $post["text"] . "</q></div>";
 								else {
 									echo "<img src='" . $post["attachments"][0]["url"] . "'/><div>";
