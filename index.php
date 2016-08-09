@@ -6,9 +6,37 @@
 <html lang="en">
 	<head>
 		<title>Groupme Analysis</title>
+
+		<!-- SEO -->
+		<meta name="robots" content="index, follow, archive">
+		<meta charset="utf-8" />
+		<meta http-equiv="Cache-control" content="public">
+
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:creator" content="@alex_beals">
+
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="Groupme Analysis">
+		<meta property="og:image" content="http://groupmeanalysis.com/assets/images/header.png">
+		<meta property="og:url" content="http://groupmeanalysis.com">
+		<meta property="og:description" content="Analyze any of your groupme's at the click of a button.">
+
+		<meta name="description" content="Analyze any of your groupme's at the click of a button.">
+
+		<!-- Favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/assets/favicon/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/assets/favicon/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/assets/favicon/manifest.json">
+		<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#00aff0">
+		<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+		<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+		<meta name="theme-color" content="#00aff0">
+
 		<?php
+			// Respect 'Request Desktop'
 			if (preg_match("/(iPhone|iPod|iPad|Android|BlackBerry|Mobile)/i", $_SERVER['HTTP_USER_AGENT'])) {
-				?><meta name="viewport" content="width=500"><?php
+				?><meta name="viewport" content="width=650"><?php
 			}
 		?>
 
@@ -19,13 +47,14 @@
 	</head>
 	<body>
 		<header>
-			<img src="assets/header.png" alt="header" />
+			<img src="assets/images/header.png" alt="header" />
 		</header>
 		<div class="cta">
 			<div>
 				<h1>Get all the statistics on your GroupMe messages!</h1>
 				<a class="button" href="#steps">Get Started</a>
 			</div>
+			<img src="assets/images/phone.png" alt="phone" />
 		</div>
 		<div class="steps" id="steps">
 			<ul>
@@ -34,7 +63,7 @@
 						<h3>Step 1</h3>
 						<div>
 							Add user from menu.
-							<img src="assets/add0.jpg" />
+							<img src="assets/images/add0.jpg" />
 						</div>
 					</li>
 					<li>
@@ -45,7 +74,7 @@
 								619-432-4317
 							</div>
 							and click 'Add new phone number'
-							<img src="assets/add1.jpg" />
+							<img src="assets/images/add1.jpg" />
 						</div>
 					</li>
 				</div>
@@ -58,7 +87,7 @@
 								<?php echo $name; ?>
 							</div>
 							and uncheck 'Save to your Address Book'
-							<img src="assets/add2.jpg" />
+							<img src="assets/images/add2.jpg" />
 						</div>
 					</li>
 					<li>
@@ -72,5 +101,15 @@
 				</div>
 			</ul>
 		</div>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-82195594-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
 	</body>
 </html>

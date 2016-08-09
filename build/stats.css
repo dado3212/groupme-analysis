@@ -66,7 +66,7 @@ header {
       background-color: #00aff0; }
 
 #tabs {
-  height: calc(100% - 180px);
+  height: calc(100% - 150px);
   margin-top: -30px; }
 
 #group, #individuals {
@@ -80,6 +80,7 @@ header {
   justify-content: center;
   max-width: 50em;
   margin: 0 auto;
+  padding: 0 20px;
   margin-bottom: 10px; }
   #group .main-stats div {
     font-size: 1.7em;
@@ -99,30 +100,33 @@ header {
       font-size: 0.8em;
       margin-bottom: 5px; }
 #group #mentions {
-  padding: 20px;
-  background-color: white;
-  max-width: 50em;
   margin: 0 auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
-  #group #mentions div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px; }
-    #group #mentions div .number {
-      font-size: 1.3em;
-      font-weight: 600;
-      margin-left: auto; }
-    #group #mentions div .profile {
-      display: inline-block;
-      width: 3em;
-      height: 3em;
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      margin-right: 10px; }
-      #group #mentions div .profile[style^="background-image: url('')"] {
-        background-image: url("../assets/unknown.png") !important; }
+  padding: 0px 20px;
+  box-sizing: content-box;
+  max-width: 50em; }
+  #group #mentions .wrapper {
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    #group #mentions .wrapper div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px; }
+      #group #mentions .wrapper div .number {
+        font-size: 1.3em;
+        font-weight: 600;
+        margin-left: auto; }
+      #group #mentions .wrapper div .profile {
+        display: inline-block;
+        width: 3em;
+        height: 3em;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-right: 10px; }
+        #group #mentions .wrapper div .profile[style^="background-image: url('')"] {
+          background-image: url("../assets/images/unknown.png") !important; }
 #group #comments {
   padding: 20px; }
   #group #comments ul {
@@ -159,7 +163,7 @@ header {
           background-repeat: no-repeat;
           margin-right: 10px; }
           #group #comments ul li .top .profile[style^="background-image: url('')"] {
-            background-image: url("../assets/unknown.png") !important; }
+            background-image: url("../assets/images/unknown.png") !important; }
         #group #comments ul li .top .likes {
           font-size: 0.8em;
           margin-left: auto; }
@@ -220,7 +224,7 @@ header {
         background-size: cover;
         background-repeat: no-repeat; }
         #individuals .all .people .profile[style^="background-image: url('')"] {
-          background-image: url("../assets/unknown.png") !important; }
+          background-image: url("../assets/images/unknown.png") !important; }
     #individuals .all .detail {
       flex: 1;
       padding: 10px;
@@ -269,7 +273,7 @@ header {
           background-repeat: no-repeat;
           margin-right: 10px; }
           #individuals .all .detail .secondary-stats .profile[style^="background-image: url('')"] {
-            background-image: url("../assets/unknown.png") !important; }
+            background-image: url("../assets/images/unknown.png") !important; }
         #individuals .all .detail .secondary-stats .number {
           margin-left: auto;
           padding-left: 10px;
@@ -284,7 +288,7 @@ header {
         background-size: cover;
         background-repeat: no-repeat; }
         #individuals .all .detail .image[style="background-image: url('');"] {
-          background-image: url("../assets/unknown.png") !important; }
+          background-image: url("../assets/images/unknown.png") !important; }
       #individuals .all .detail svg > rect {
         fill: transparent !important; }
   #individuals #sort {

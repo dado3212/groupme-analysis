@@ -1,0 +1,12 @@
+{
+	"name": "Groupme Analysis",
+	"icons": [
+		{
+			"src": "\/assets\/favicon\/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image\/png"
+		}
+	],
+	"theme_color": "#00aff0",
+	"display": "standalone"
+}

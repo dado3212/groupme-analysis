@@ -16,6 +16,8 @@
 
 	$response = $stmt->fetch(PDO::FETCH_ASSOC);
 
+	if ($response) {
+
 	$info = json_decode($response["data"], true);
 
 	$names = $info["total"]["names"];
@@ -32,6 +34,41 @@
 <html lang="en">
 	<head>
 		<title><?php echo "Groupme Analysis | {$names[0]['name']}"; ?></title>
+
+		<!-- SEO -->
+		<meta name="robots" content="index, follow, archive">
+		<meta charset="utf-8" />
+		<meta http-equiv="Cache-control" content="public">
+
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:creator" content="@alex_beals">
+
+		<meta property="og:type" content="website">
+		<meta name="robots" content="index, follow, archive">
+		<meta charset="utf-8" />
+		<meta http-equiv="Cache-control" content="public">
+
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:creator" content="@alex_beals">
+
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="<?php echo "Groupme Analysis | {$names[0]['name']}"; ?>">
+		<meta property="og:image" content="http://groupmeanalysis.com/assets/images/header.png">
+		<meta property="og:url" content="http://groupmeanalysis.com">
+		<meta property="og:description" content="Analysis of the group <?php echo $names[0]['name']; ?>">
+
+		<meta name="description" content="Analysis of the group <?php echo $names[0]['name']; ?>">
+
+		<!-- Favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/assets/favicon/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/assets/favicon/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/assets/favicon/manifest.json">
+		<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#00aff0">
+		<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+		<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+		<meta name="theme-color" content="#00aff0">
+
 		<?php
 			// Respect request desktop
 			if (preg_match("/(iPhone|iPod|iPad|Android|BlackBerry|Mobile)/i", $_SERVER['HTTP_USER_AGENT'])) {
@@ -56,6 +93,7 @@
 			var chartOptions = {
 				title: '\'s Activity by Time',
 				height: 300,
+				width: 100,
 				hAxis: {
 					format: 'ha',
 					viewWindow: {
@@ -76,9 +114,13 @@
 
 				var chart = new google.visualization.ColumnChart(document.getElementById('histogram'));
 
+				chartOptions.width = $(".all .detail").width();
 				chart.draw(data, chartOptions);
 
 				$(window).resize(function () {
+					$("#histogram").hide();
+					chartOptions.width = $(".all .detail").width();
+					$("#histogram").show();
 					chart.draw(data, chartOptions);
 				});
 			}
@@ -118,7 +160,7 @@
 					</div>
 					<div>
 						<h4>
-							<img src="../assets/groupme.png" />
+							<img src="../assets/images/groupme.png" />
 							Comments
 						</h4>
 						<?php echo number_format($info['total']['comments']); ?>
@@ -132,23 +174,25 @@
 					</div>
 					<div>
 						<h4>
-							<img src="../assets/heart.png" />
+							<img src="../assets/images/heart.png" />
 							Likes
 						</h4>
 						<?php echo number_format($info['total']['likes']); ?>
 					</div>
 				</div>
 				<div id="mentions">
-					<h2>Most Mentioned</h2>
-					<?php foreach ($info['total']['mentions'] as $id => $number) {
-						$author = $info["individuals"][$id];
-						?>
-						<div>
-							<span class="profile" style="background-image: url('<?php echo $author["image"]; ?>');"></span>
-							<span class="name"><?php echo $author["name"]; ?></span>
-							<span class="number"><?php echo $number; ?></span>
-						</div>
-					<?php } ?>
+					<div class='wrapper'>
+						<h2>Most Mentioned</h2>
+						<?php foreach ($info['total']['mentions'] as $id => $number) {
+							$author = $info["individuals"][$id];
+							?>
+							<div>
+								<span class="profile" style="background-image: url('<?php echo $author["image"]; ?>');"></span>
+								<span class="name"><?php echo $author["name"]; ?></span>
+								<span class="number"><?php echo $number; ?></span>
+							</div>
+						<?php } ?>
+					</div>
 				</div>
 				<div id="comments">
 					<ul>
@@ -163,7 +207,7 @@
 								<span class="number"><?php echo $i + 1; ?></span>
 								<span class="profile" style="background-image: url('<?php echo $author_image; ?>');"></span>
 								<span class="name"><?php echo $author; ?></span>
-								<span class="likes"><img src="../assets/heart.png" /><?php echo count($post["likes"]); ?></span>
+								<span class="likes"><img src="../assets/images/heart.png" /><?php echo count($post["likes"]); ?></span>
 							</div>
 							<div class="content">
 								<?php
@@ -202,7 +246,7 @@
 						<div class="main-stats">
 							<div class="comments">
 								<h4>
-									<img src="../assets/groupme.png" />
+									<img src="../assets/images/groupme.png" />
 									Comments
 								</h4>
 								<span></span>
@@ -216,21 +260,21 @@
 							</div>
 							<div class="likes-received">
 								<h4>
-									<img src="../assets/heart.png" />
+									<img src="../assets/images/heart.png" />
 									Likes Received
 								</h4>
 								<span></span>
 							</div>
 							<div class="likes-given">
 								<h4>
-									<img src="../assets/shared.png" />
+									<img src="../assets/images/shared.png" />
 									Likes Given
 								</h4>
 								<span></span>
 							</div>
 							<div class="self-likes">
 								<h4>
-									<img src="../assets/smiley.png" />
+									<img src="../assets/images/smiley.png" />
 									Self Likes
 								</h4>
 								<span></span>
@@ -274,5 +318,18 @@
 				</div>
 			</div>
 		</div>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-82195594-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
 	</body>
 </html>
+<?php } else {
+	header('Location: http://www.alexbeals.com/projects/groupme') ;
+} ?>

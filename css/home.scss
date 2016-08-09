@@ -94,15 +94,26 @@ header {
 .cta {
 	background-color: $background;
 	height: 400px;
+	padding: 0px 20px;
 
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+
+	overflow: hidden;
 
 	h1 {
 		margin: 0px;
 		text-align: center;
+	}
+
+	img {
+		height: 500px;
+		min-width: 300px;
+		transform: rotate(30deg);
+		margin-bottom: -170px;
+		margin-right: 100px;
 	}
 }
 

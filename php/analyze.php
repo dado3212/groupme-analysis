@@ -21,7 +21,7 @@
 
 			$stmt->execute();
 
-			sendMessage($group, "Check out the analysis of this group at http://alexbeals.com/projects/groupme/stats?group=" . $_POST['name'] . "&password=" . $password);
+			sendMessage($group, "Check out the analysis of this group at http://groupmeanalysis.com/stats?group=" . $_POST['name'] . "&password=" . $password);
 
 			sendMessage($group, "Please remove me now. (If I remove myself I can never come back 😞)");
 

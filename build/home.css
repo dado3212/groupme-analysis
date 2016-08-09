@@ -61,13 +61,21 @@ header {
 .cta {
   background-color: #e6e5e0;
   height: 400px;
+  padding: 0px 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
-  align-items: center; }
+  align-items: center;
+  overflow: hidden; }
   .cta h1 {
     margin: 0px;
     text-align: center; }
+  .cta img {
+    height: 500px;
+    min-width: 300px;
+    transform: rotate(30deg);
+    margin-bottom: -170px;
+    margin-right: 100px; }
 
 .steps ul {
   list-style-type: none;
