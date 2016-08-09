@@ -199,6 +199,10 @@ header {
 						background-repeat: no-repeat;
 
 						margin-right: 10px;
+
+						&[style^="background-image: url('')"] {
+							background-image: url('../assets/unknown.png') !important;
+						}
 					}
 
 					.likes {
@@ -291,6 +295,10 @@ header {
 				background-position: center;
 				background-size: cover;
 				background-repeat: no-repeat;
+
+				&[style^="background-image: url('')"] {
+					background-image: url('../assets/unknown.png') !important;
+				}
 			}
 		}
 
@@ -364,6 +372,10 @@ header {
 					background-repeat: no-repeat;
 
 					margin-right: 10px;
+
+					&[style^="background-image: url('')"] {
+						background-image: url('../assets/unknown.png') !important;
+					}
 				}
 
 				.number {
@@ -379,6 +391,10 @@ header {
 				width: 150px;
 				height: 150px;
 				border-radius: 50%;
+
+				&[style="background-image: url('');"] {
+					background-image: url('../assets/unknown.png') !important;
+				}
 
 				background-position: center;
 				background-size: cover;

@@ -53,30 +53,34 @@
 		<script src="../js/stats.js"></script>
 
 		<script>
-			function drawChart(values, name) {
+			var chartOptions = {
+				title: '\'s Activity by Time',
+				height: 300,
+				hAxis: {
+					format: 'ha',
+					viewWindow: {
+						min: [0, 0, 0],
+						max: [23, 59, 59]
+					},
+					gridlines: { count: 12 } 
+				},
+				legend: 'none',
+			};
+
+			function drawChart(values) {
 				var data = new google.visualization.DataTable();
 				data.addColumn('timeofday', 'Time of Day');
 				data.addColumn('number', 'Number of Messages');
 
 				data.addRows(values);
 
-				var options = {
-					title: name + '\'s Activity by Time',
-					height: 300,
-					hAxis: {
-						format: 'ha',
-						viewWindow: {
-							min: [0, 0, 0],
-							max: [23, 59, 59]
-						},
-						gridlines: { count: 12 } 
-					},
-					legend: 'none',
-				};
-
 				var chart = new google.visualization.ColumnChart(document.getElementById('histogram'));
 
-				chart.draw(data, options);
+				chart.draw(data, chartOptions);
+
+				$(window).resize(function () {
+					chart.draw(data, chartOptions);
+				});
 			}
 
 			// Dump of all people
@@ -173,7 +177,7 @@
 						for ($i = 0; $i < count($people); $i++) {
 							$person = $people[$i]; ?>
 							<div data-id='<?php echo $i; ?>' <?php if ($i == 0) echo "class='active'"; ?> onclick="changePerson(people[<?php echo $i; ?>], this)">
-								<div class="profile" style="background-image: url(<?php echo $person['image']; ?>)"></div>
+								<div class="profile" style="background-image: url('<?php echo $person['image']; ?>')"></div>
 								<span><?php echo $person['name']; ?></span>
 							</div>
 						<?php }

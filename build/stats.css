@@ -133,6 +133,8 @@ header {
           background-size: cover;
           background-repeat: no-repeat;
           margin-right: 10px; }
+          #group #comments ul li .top .profile[style^="background-image: url('')"] {
+            background-image: url("../assets/unknown.png") !important; }
         #group #comments ul li .top .likes {
           font-size: 0.8em;
           margin-left: auto; }
@@ -192,6 +194,8 @@ header {
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat; }
+        #individuals .all .people .profile[style^="background-image: url('')"] {
+          background-image: url("../assets/unknown.png") !important; }
     #individuals .all .detail {
       flex: 1;
       padding: 10px;
@@ -239,6 +243,8 @@ header {
           background-size: cover;
           background-repeat: no-repeat;
           margin-right: 10px; }
+          #individuals .all .detail .secondary-stats .profile[style^="background-image: url('')"] {
+            background-image: url("../assets/unknown.png") !important; }
         #individuals .all .detail .secondary-stats .number {
           margin-left: auto;
           padding-left: 10px;
@@ -252,6 +258,8 @@ header {
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat; }
+        #individuals .all .detail .image[style="background-image: url('');"] {
+          background-image: url("../assets/unknown.png") !important; }
       #individuals .all .detail svg > rect {
         fill: transparent !important; }
   #individuals #sort {

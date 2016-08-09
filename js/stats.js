@@ -60,7 +60,7 @@ $(document).ready(function() {
     // Repopulates with sorted
     $(".people").html('');
     for (var key of people_sorted) {
-      $(".people").append("<div data-id='" + key + "' onclick='changePerson(people[" + key + "], this)'><div class='profile' style='background-image: url(" + people[key].image + ")'></div><span>" + people[key].name + "</span></div>");
+      $(".people").append("<div data-id='" + key + "' onclick='changePerson(people[" + key + "], this)'><div class='profile' style=\"background-image: url(" + (people[key].image ? people[key].image : "''") + ")\"></div><span>" + people[key].name + "</span></div>");
     }
 
     // Reactivates in sidebar
@@ -85,7 +85,7 @@ $(document).ready(function() {
     $(".detail .likes-received span").html(person.total_likes_received.toString().replace(commaRegex, "$1,"));
     $(".detail .likes-given span").html(person.total_likes_given.toString().replace(commaRegex, "$1,"));
     $(".detail .self-likes span").html(person.self_likes.toString().replace(commaRegex, "$1,"));
-    $(".detail .image").css("background-image", "url(" + person.image + ")");
+    $(".detail .image").attr('style', "background-image: url(" + (person.image ? person.image : "''") + ");");
 
     // People with common likes
     $(".shared").html("<h4># of Commonly Liked Posts</h4>");
@@ -95,7 +95,7 @@ $(document).ready(function() {
         return (p.id === key);
       });
       if (sharer.length > 0) {
-        $(".shared").append("<div class='sharer'><div class='profile' style='background-image: url(" + sharer[0].image + ")'></div><span class='name'>" + sharer[0].name + "</span><span class='number'>" + person.shared[key] + "</span>");
+        $(".shared").append("<div class='sharer'><div class='profile' style=\"background-image: url(" + (sharer[0].image ? sharer[0].image : "''") + ");\"></div><span class='name'>" + sharer[0].name + "</span><span class='number'>" + person.shared[key] + "</span>");
       }
     }
 
@@ -107,15 +107,22 @@ $(document).ready(function() {
         return (p.id === key);
       });
       if (lover.length > 0) {
-        $(".loved").append("<div class='liker'><div class='profile' style='background-image: url(" + lover[0].image + ")'></div><span class='name'>" + lover[0].name + "</span><span class='number'>" + Math.round(person.loved[key]/person.total_likes_received*100) + "%</span>");
+        $(".loved").append("<div class='liker'><div class='profile' style=\"background-image: url(" + (lover[0].image ? lover[0].image : "''") + ")\"></div><span class='name'>" + lover[0].name + "</span><span class='number'>" + Math.round(person.loved[key]/person.total_likes_received*100) + "%</span>");
       }
     }
 
     // Update histogram
     chartOptions.title = person.name + '\'s Activity by Time';
+    $(window).off('resize');
     var data = person.times.map(function (num, time) {
       return [[time, 0, 0], num];
     });
-    drawChart(data, person.name);
+    drawChart(data);
   }
+
+  // Set up fix
+  $("a[href='#individuals']").one('click', function() {
+    if (people[0])
+      changePerson(people[0], null);
+  });
 });
