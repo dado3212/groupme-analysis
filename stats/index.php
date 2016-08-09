@@ -138,6 +138,18 @@
 						<?php echo number_format($info['total']['likes']); ?>
 					</div>
 				</div>
+				<div id="mentions">
+					<h2>Most Mentioned</h2>
+					<?php foreach ($info['total']['mentions'] as $id => $number) {
+						$author = $info["individuals"][$id];
+						?>
+						<div>
+							<span class="profile" style="background-image: url('<?php echo $author["image"]; ?>');"></span>
+							<span class="name"><?php echo $author["name"]; ?></span>
+							<span class="number"><?php echo $number; ?></span>
+						</div>
+					<?php } ?>
+				</div>
 				<div id="comments">
 					<ul>
 						<h2>Best Comments</h2>

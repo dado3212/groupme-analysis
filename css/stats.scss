@@ -151,6 +151,43 @@ header {
 		}
 	}
 
+	#mentions {
+		padding: 20px;
+		background-color: white;
+		max-width: 50em;
+		margin: 0 auto;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+		div {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+
+			.number {
+				font-size: 1.3em;
+				font-weight: 600;
+				margin-left: auto;
+			}
+
+			.profile {
+				display: inline-block;
+				width: 3em;
+				height: 3em;
+				border-radius: 50%;
+
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+
+				margin-right: 10px;
+
+				&[style^="background-image: url('')"] {
+					background-image: url('../assets/unknown.png') !important;
+				}
+			}
+		}
+	}
+
 	#comments {
 		padding: 20px;
 
