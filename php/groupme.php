@@ -5,10 +5,10 @@
 	if (!defined('API')) {
 		die('Direct access not permitted.');
 	}
-	//define('API', true);
+	// define('API', true);
 	require_once('secret.php');
 
-	//echo "<pre>" . print_r(analyze("23376041"), true) . "</pre>";
+	// echo "<pre>" . print_r(analyze("21086909"), true) . "</pre>";
 
 	/**
 	 * Attempts to find the group in which it has a given name
@@ -58,6 +58,7 @@
 		$words = 0;
 		$names = [];
 		$topics = [];
+		$mentions = [];
 		$mostPopular = array_slice($messages, 0, 10);
 
 		foreach ($messages as $message) {
@@ -68,6 +69,21 @@
 			if ($message["sender_type"] == "user") { // User message
 				if (array_key_exists($message["sender_id"], $members)) {
 					$poster = $message["sender_id"];
+
+					// Increment mentions
+					if (count($message["attachments"]) > 0) {
+						foreach ($message["attachments"] as $attachment) {
+							if ($attachment["type"] == "mentions") {
+								foreach ($attachment["user_ids"] as $id) {
+									if (array_key_exists($id, $mentions)) {
+										$mentions[$id] += 1;
+									} else {
+										$mentions[$id] = 1;
+									}
+								}
+							}
+						}
+					}
 
 					// Increment total number of received likes, comments, and words
 					$members[$poster]["total_number"] += 1;
@@ -153,15 +169,24 @@
 
 		// Clean up useful information
 		foreach ($members as $key => $member) {
+			// Sort and strip most shared
 			$shared = $member["shared"];
 			arsort($shared);
 
 			$members[$key]["shared"] = array_slice($shared, 0, 3, true);
 
+			// Sort and strip most likes
 			$loved = $member["loved"];
 			arsort($loved);
 
 			$members[$key]["loved"] = array_slice($loved, 0, 3, true);
+
+			// Sort and strip mentions by people still in group
+			$mentions = array_filter($mentions, function($key) use ($members) {
+				return array_key_exists($key, $members);
+			}, ARRAY_FILTER_USE_KEY);
+			arsort($mentions);
+			$mentions = array_slice($mentions, 0, 3, true);
 		}
 
 		return [
@@ -173,6 +198,7 @@
 				"topics" => $topics,
 				"words" => $words,
 				"popular" => $mostPopular,
+				"mentions" => $mentions,
 			],
 		];
 	}
