@@ -45,6 +45,8 @@ button, .button {
 	margin: 15px auto;
 
 	transition: all 0.1s ease;
+
+	position: relative;
 }
 
 button:hover, .button:hover {
@@ -79,8 +81,36 @@ header {
 	}
 }
 
+#spinner {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+
+	border-top: 2px solid rgba(255, 255, 255, 0.2);
+	border-right: 2px solid rgba(255, 255, 255, 0.2);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+	border-left: 2px solid #ffffff;
+
+	animation: rotate 1s infinite linear;
+
+	position: absolute;
+	margin: -5px 0 0 10px;
+
+	display: none;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 #alert {
 	padding: 10px;
+	margin-bottom: 10px;
 
 	&.success {
 		background-color: lighten(#4E9A26, 50%);
@@ -98,10 +128,13 @@ header {
 
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
 	align-items: center;
 
 	overflow: hidden;
+
+	div {
+		min-width: 180px;
+	}
 
 	h1 {
 		margin: 0px;
@@ -148,7 +181,7 @@ header {
 				box-shadow: 0 0 15px rgba(0, 175, 240, 1.0);
 			}
 
-			div {
+			> div {
 				flex: 1;
 
 				display: flex;

@@ -63,8 +63,8 @@
 						<h3>Step 1</h3>
 						<div>
 							Add user on Groupme to the group you want to analyze.
-							<img src="assets/images/add0.jpg" />
 						</div>
+						<img src="assets/images/add0.jpg" alt="Add User" />
 					</li>
 					<li>
 						<h3>Step 2</h3>
@@ -74,8 +74,8 @@
 								619-432-4317
 							</div>
 							and click 'Add new phone number'
-							<img src="assets/images/add1.jpg" />
 						</div>
+						<img src="assets/images/add1.jpg" alt="Use Phone #" />
 					</li>
 				</div>
 				<div class="row">
@@ -87,16 +87,21 @@
 								<?php echo $name; ?>
 							</div>
 							and uncheck 'Save to your Address Book'
-							<img src="assets/images/add2.jpg" />
 						</div>
+						<img src="assets/images/add2.jpg" alt="Set Name" />
 					</li>
 					<li>
 						<h3>Step 4</h3>
 						<span id="alert"></span>
 						<div>
 							Click this button once the user has been added to the group!
-							<button type="submit" id="added" data-name="<?php echo $name; ?>">Added!</button>
+							<button type="submit" id="added" data-name="<?php echo $name; ?>">
+								Added!
+								<div id="spinner">
+								</div>
+							</button>
 						</div>
+						<img src="assets/images/add3.jpg" alt="Stats Comment" />
 					</li>
 				</div>
 			</ul>

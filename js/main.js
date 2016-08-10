@@ -1,42 +1,55 @@
 $(document).ready(function() {
+  // Handle 'Added' button functionality
   $('#added').on('click', function() {
     var name = $(this).data('name');
-    console.log(name);
 
-    // Run PHP script
+    // Start spinner
+    $('#spinner').css('display', 'inline-block');
+
+    // Check to see if the bot is in a group with that name
     $.post('php/check.php', {
       name: name, 
     })
     .done(function(data) {
-      console.log(data);
       var res = $.parseJSON(data);
-      console.log(res);
 
-      if (res.response === "error") {
-        $("#alert").removeClass().addClass('error');
-        $("#alert").html(res.message);
+      // Error handling
+      if (res.response === 'error') {
+        $('#alert').removeClass().addClass('error');
+        $('#alert').html(res.message);
+
+        $('#spinner').css('display', 'none');
+      // Found group
       } else {
-        $("#alert").removeClass().addClass('success');
-        $("#alert").html("Found group!  Beginning to analyze...");
+        $('#alert').removeClass().addClass('success');
+        $('#alert').html('Found group!  Beginning to analyze...');
 
+        // Starts analyzing, stores to DB, returns update when done
         $.post('php/analyze.php', {
           name: name,
         }).done(function(data) {
           var res = $.parseJSON(data);
 
           if (res.response === "error") {
-            $("#alert").removeClass().addClass('error');
+            $('#alert').removeClass().addClass('error');
           } else {
-            $("#alert").removeClass().addClass('success');
+            $('#alert').removeClass().addClass('success');
           }
 
-          $("#alert").html(res.message);
+          $('#alert').html(res.message);
+
+          $('#spinner').css('display', 'none');
         });
       }
+    })
+    .fail(function() {
+      $('#alert').html('Something went wrong.  Contact the site administrator.');
+
+      $('#spinner').css('display', 'none');
     });
   });
 
-  // Smooth scrolling through targets
+  // Smooth scrolling through targets (source: https://css-tricks.com/snippets/jquery/smooth-scrolling/)
   $('a[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
       var target = $(this.hash);
