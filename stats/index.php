@@ -215,8 +215,18 @@
 						<h2>Best Comments</h2>
 					<?php for ($i = 0; $i < count($info['total']['popular']); $i++) {
 						$post = $info['total']['popular'][$i];
-						$author = ($post["sender_type"] == "user") ? $info["individuals"][$post["sender_id"]]["name"] : "<code>System</code>";
-						$author_image = ($post["sender_type"] == "user") ? $info["individuals"][$post["sender_id"]]["image"] : "";
+						if ($post["sender_type"] == "user") {
+							if (array_key_exists($post["sender_id"], $info["individuals"])) {
+								$author = $info["individuals"][$post["sender_id"]]["name"];
+								$author_image = $info["individuals"][$post["sender_id"]]["image"];
+							} else {
+								$author = "<i>Deleted User</i>";
+								$author_image = "";
+							}
+						} else {
+							$author = "<code>System</code>";
+							$author_image = "";
+						}
 						?>
 						<li>
 							<div class="top">
