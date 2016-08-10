@@ -87,6 +87,23 @@ $(document).ready(function() {
     $(".detail .self-likes span").html(person.self_likes.toString().replace(commaRegex, "$1,"));
     $(".detail .image").attr('style', "background-image: url(" + (person.image ? person.image : "''") + ");");
 
+    // Best comment
+    if (person.best_comment) {
+      $(".detail .best-comment .top .likes").html("<img src='../assets/images/heart.png' />" + person.max_likes);
+      if (person.best_comment.attachments.length == 0 || (person.best_comment.attachments.length > 0 && person.best_comment.attachments[0].type !== "image")) {
+        $(".detail .best-comment .content").html("<div><q>" + person.best_comment.text + "</q></div>");
+      } else {
+        var comment = "<img src='" + person.best_comment.attachments[0].url + "' /><div>";
+        if (person.best_comment.text)
+          comment += "<q>" + person.best_comment.text + "</q>";
+        comment += "</div>";
+        $(".detail .best-comment .content").html(comment);
+      }
+    } else {
+      $(".detail .best-comment .top .likes").html("");
+      $(".detail .best-comment .content").html("<h4>No liked comments.</h4>");
+    }
+
     // People with common likes
     $(".shared").html("<h4># of Commonly Liked Posts</h4>");
     var shared_sorted = Object.keys(person.shared).sort(function(a,b) {return person.shared[b]-person.shared[a]});

@@ -390,6 +390,38 @@ header {
 				}
 			}
 
+			.best-comment {
+				padding: 10px 20px;
+				margin: 0px 5px;
+
+				box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+				.top {
+					display: flex;
+					align-items: center;
+					margin-bottom: 10px;
+
+					.likes {
+						font-size: 0.8em;
+						margin-left: auto;
+
+						img {
+							width: 1.4em;
+							height: 1.4em;
+							vertical-align: middle;
+
+							margin-right: 5px;
+							margin-top: -4px;
+						}
+					}
+				}
+
+				img {
+					max-width: 200px;
+					max-height: 200px;
+				}
+			}
+
 			.secondary-stats {
 				display: flex;
 				justify-content: space-around;

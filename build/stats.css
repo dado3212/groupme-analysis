@@ -254,6 +254,26 @@ header {
           #individuals .all .detail .main-stats div h4 {
             font-size: 0.6em;
             margin-bottom: 5px; }
+      #individuals .all .detail .best-comment {
+        padding: 10px 20px;
+        margin: 0px 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
+        #individuals .all .detail .best-comment .top {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px; }
+          #individuals .all .detail .best-comment .top .likes {
+            font-size: 0.8em;
+            margin-left: auto; }
+            #individuals .all .detail .best-comment .top .likes img {
+              width: 1.4em;
+              height: 1.4em;
+              vertical-align: middle;
+              margin-right: 5px;
+              margin-top: -4px; }
+        #individuals .all .detail .best-comment img {
+          max-width: 200px;
+          max-height: 200px; }
       #individuals .all .detail .secondary-stats {
         display: flex;
         justify-content: space-around; }

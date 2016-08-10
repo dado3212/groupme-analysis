@@ -280,6 +280,14 @@
 								<span></span>
 							</div>
 						</div>
+						<div class="best-comment">
+							<h3>Best Comment</h3>
+							<div class="top">
+								<span class="likes"><img src="../assets/images/heart.png" /><?php echo count($post["likes"]); ?></span>
+							</div>
+							<div class="content">
+							</div>
+						</div>
 						<div id="histogram"></div>
 						<div class="secondary-stats">
 							<div class="shared">
