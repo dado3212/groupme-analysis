@@ -1,6 +1,6 @@
 <?php
-	//error_reporting(E_ALL);
-	//ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
 
 	define('API', TRUE);
 	include_once('../php/groupme.php');
@@ -29,11 +29,27 @@
 
 	usort($names, function($a, $b) { return $a["time"] < $b["time"]; });
 	usort($topics, function($a, $b) { return $a["time"] < $b["time"]; });
+
+	if (isset($info["total"]["name"])) {
+		$name = $info["total"]["name"];
+	} else if (isset($names) && count($names) > 0) {
+		$name = $names[0]["name"];
+	} else {
+		$name = "";
+	}
+
+	if (isset($info["total"]["topic"])) {
+		$topic = $info["total"]["topic"];
+	} else if (isset($topics) && count($topics) > 0) {
+		$topic = $topics[0]["name"];
+	} else {
+		$topic = "";
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title><?php echo "Groupme Analysis | {$names[0]['name']}"; ?></title>
+		<title><?php echo "Groupme Analysis | {$name}"; ?></title>
 
 		<!-- SEO -->
 		<meta name="robots" content="index, follow, archive">
@@ -52,12 +68,12 @@
 		<meta name="twitter:creator" content="@alex_beals">
 
 		<meta property="og:type" content="website">
-		<meta property="og:title" content="<?php echo "Groupme Analysis | {$names[0]['name']}"; ?>">
+		<meta property="og:title" content="<?php echo "Groupme Analysis | {$name}"; ?>">
 		<meta property="og:image" content="http://groupmeanalysis.com/assets/images/header.png">
 		<meta property="og:url" content="http://groupmeanalysis.com">
-		<meta property="og:description" content="Analysis of the group <?php echo $names[0]['name']; ?>">
+		<meta property="og:description" content="Analysis of the group <?php echo $name; ?>">
 
-		<meta name="description" content="Analysis of the group <?php echo $names[0]['name']; ?>">
+		<meta name="description" content="Analysis of the group <?php echo $name; ?>">
 
 		<!-- Favicons -->
 		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
@@ -140,8 +156,8 @@
 	</head>
 	<body>
 		<header>
-			<h1><?php echo $names[0]["name"] ?></h1>
-			<h3><?php echo $topics[0]["name"] ?></h3>
+			<h1><?php echo $name ?></h1>
+			<h3><?php echo $topic ?></h3>
 			<h6><?php echo "(As of " . date("M d, Y h:i a", strtotime($response['date'])) . ")"; ?></h6>
 		</header>
 		<div id="tabs">

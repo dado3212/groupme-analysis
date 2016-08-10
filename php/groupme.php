@@ -1,6 +1,6 @@
 <?php
-	// error_reporting(E_ALL);
-	// ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
 
 	if (!defined('API')) {
 		die('Direct access not permitted.');
@@ -8,7 +8,7 @@
 	// define('API', true);
 	require_once('secret.php');
 
-	// echo "<pre>" . print_r(analyze("23376041"), true) . "</pre>";
+	// echo "<pre>" . print_r(getCurrentGroupInfo("23694922"), true) . "</pre>";
 
 	/**
 	 * Attempts to find the group in which it has a given name
@@ -45,20 +45,18 @@
 		global $TOKEN;
 
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/${group}?token=${TOKEN}&per_page=100");
+		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/${group}?token=${TOKEN}");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$contents = curl_exec($ch);
 		curl_close($ch);
 
-		$groups = json_decode($contents, true)['response'];
-		foreach ($groups as $group) {
-			foreach ($group['members'] as $member) {
-				if ($member['user_id'] == $ME && $member['nickname'] == $name) {
-					return $group['group_id'];
-				}
-			}
-		}
-		return false;
+		$data = json_decode($contents, true)['response'];
+		return [
+			"name" => $data['name'],
+			"image" => $data['image_url'],
+			"topic" => $data['description'],
+			"created_at" => $data['created_at'],
+		];
 	}
 
 	/**
@@ -74,6 +72,8 @@
 		$members = getMembers($group);
 
 		$messages = getMessages($group);
+
+		$groupInfo = getCurrentGroupInfo($group);
 
 		usort($messages, function ($a, $b) { return count($a["likes"]) < count($b["likes"]); });
 
@@ -220,7 +220,11 @@
 				"comments" => $totalComments,
 				"likes" => $totalLikes,
 				"names" => $names,
+				"name" => $groupInfo['name'],
 				"topics" => $topics,
+				"topic" => $groupInfo['topic'],
+				"image" => $groupInfo['image'],
+				"creation" => $groupInfo['created_at'],
 				"words" => $words,
 				"popular" => $mostPopular,
 				"mentions" => $mentions,
