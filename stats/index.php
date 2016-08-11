@@ -171,7 +171,7 @@
 							<i class="fa fa-user" aria-hidden="true"></i>
 							Members
 						</h4>
-						<?php echo number_format(count($info["individuals"]) - 1); ?>
+						<?php echo number_format(count($info["individuals"])); ?>
 					</div>
 					<div>
 						<h4>
