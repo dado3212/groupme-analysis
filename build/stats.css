@@ -76,7 +76,9 @@ header {
 
 #group .main-stats {
   display: flex;
+  display: -webkit-flex;
   flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
   justify-content: center;
   max-width: 50em;
   margin: 0 auto;
@@ -87,6 +89,7 @@ header {
     margin: 5px;
     text-align: center;
     flex-grow: 1;
+    -webkit-flex-grow: 1;
     background-color: white;
     padding: 10px 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
@@ -110,6 +113,7 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
     #group #mentions .wrapper div {
       display: flex;
+      display: -webkit-flex;
       align-items: center;
       margin-bottom: 10px; }
       #group #mentions .wrapper div .number {
@@ -147,6 +151,7 @@ header {
         box-shadow: inset 0 0 3px #008abd; }
       #group #comments ul li .top {
         display: flex;
+        display: -webkit-flex;
         align-items: center;
         margin-bottom: 10px; }
         #group #comments ul li .top .number {
@@ -179,11 +184,15 @@ header {
 
 #individuals {
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   min-height: 100%; }
   #individuals .all {
     display: flex;
+    display: -webkit-flex;
     max-width: 45em;
     background-color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
@@ -227,14 +236,17 @@ header {
           background-image: url("../assets/images/unknown.png") !important; }
     #individuals .all .detail {
       flex: 1;
+      -webkit-flex: 1;
       padding: 10px;
       border-left: 1px solid rgba(0, 0, 0, 0.3); }
       #individuals .all .detail h1 {
         padding-top: 0px; }
       #individuals .all .detail .main-stats {
         display: flex;
+        display: -webkit-flex;
         justify-content: center;
         flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
         margin-bottom: 10px;
         max-width: 40em; }
         #individuals .all .detail .main-stats div {
@@ -242,6 +254,7 @@ header {
           text-align: center;
           margin: 5px;
           flex-grow: 1;
+          -webkit-flex-grow: 1;
           background-color: white;
           padding: 5px 10px;
           box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
@@ -260,7 +273,9 @@ header {
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
         #individuals .all .detail .best-comment .top {
           display: flex;
+          display: -webkit-flex;
           align-items: center;
+          -webkit-align-items: center;
           margin-bottom: 10px; }
           #individuals .all .detail .best-comment .top .likes {
             font-size: 0.8em;
@@ -276,10 +291,14 @@ header {
           max-height: 200px; }
       #individuals .all .detail .secondary-stats {
         display: flex;
-        justify-content: space-around; }
+        display: -webkit-flex;
+        justify-content: space-around;
+        -webkit-justify-content: space-around; }
         #individuals .all .detail .secondary-stats .sharer, #individuals .all .detail .secondary-stats .liker {
           display: flex;
+          display: -webkit-flex;
           align-items: center;
+          -webkit-align-items: center;
           margin-bottom: 5px; }
         #individuals .all .detail .secondary-stats h4 {
           margin-bottom: 10px; }

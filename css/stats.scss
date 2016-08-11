@@ -114,7 +114,9 @@ header {
 #group {
 	.main-stats {
 		display: flex;
+		display: -webkit-flex;
 		flex-wrap: wrap;
+		-webkit-flex-wrap: wrap;
 		justify-content: center;
 
 		max-width: 50em;
@@ -129,6 +131,7 @@ header {
 			text-align: center;
 
 			flex-grow: 1;
+			-webkit-flex-grow: 1;
 
 			background-color: white;
 			padding: 10px 20px;
@@ -165,6 +168,7 @@ header {
 
 			div {
 				display: flex;
+				display: -webkit-flex;
 				align-items: center;
 				margin-bottom: 10px;
 
@@ -222,6 +226,7 @@ header {
 
 				.top {
 					display: flex;
+					display: -webkit-flex;
 					align-items: center;
 					margin-bottom: 10px;
 
@@ -274,13 +279,17 @@ header {
 
 #individuals {
 	display: flex;
+	display: -webkit-flex;
 	justify-content: center;
+	-webkit-justify-content: center;
 	align-items: flex-start;
+	-webkit-align-items: flex-start;
 
 	min-height: 100%;
 
 	.all {
 		display: flex;
+		display: -webkit-flex;
 		max-width: 45em;
 		background-color: white;
 		box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -347,6 +356,7 @@ header {
 
 		.detail {
 			flex: 1;
+			-webkit-flex: 1;
 			padding: 10px;
 			border-left: 1px solid rgba(0, 0, 0, 0.3);
 
@@ -356,8 +366,10 @@ header {
 
 			.main-stats {
 				display: flex;
+				display: -webkit-flex;
 				justify-content: center;
 				flex-wrap: wrap;
+				-webkit-flex-wrap: wrap;
 
 				margin-bottom: 10px;
 				max-width: 40em;
@@ -367,6 +379,7 @@ header {
 					text-align: center;
 					margin: 5px;
 					flex-grow: 1;
+					-webkit-flex-grow: 1;
 
 					background-color: white;
 					padding: 5px 10px;
@@ -398,7 +411,9 @@ header {
 
 				.top {
 					display: flex;
+					display: -webkit-flex;
 					align-items: center;
+					-webkit-align-items: center;
 					margin-bottom: 10px;
 
 					.likes {
@@ -424,11 +439,15 @@ header {
 
 			.secondary-stats {
 				display: flex;
+				display: -webkit-flex;
 				justify-content: space-around;
+				-webkit-justify-content: space-around;
 
 				.sharer, .liker {
 					display: flex;
+					display: -webkit-flex;
 					align-items: center;
+					-webkit-align-items: center;
 					margin-bottom: 5px;
 				}
 
