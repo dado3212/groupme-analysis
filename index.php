@@ -12,12 +12,15 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="Cache-control" content="public">
 
-		<meta name="twitter:card" content="summary">
+		<meta name="twitter:card" content="summary_large_image">
 		<meta name="twitter:creator" content="@alex_beals">
 
 		<meta property="og:type" content="website">
 		<meta property="og:title" content="Groupme Analysis">
 		<meta property="og:image" content="http://groupmeanalysis.com/assets/images/summary.png">
+		<meta property="og:image:type" content="image/png">
+    	<meta property="og:image:width" content="1200">
+    	<meta property="og:image:height" content="630">
 		<meta property="og:url" content="http://groupmeanalysis.com">
 		<meta property="og:description" content="Analyze any of your groupme's at the click of a button.">
 
