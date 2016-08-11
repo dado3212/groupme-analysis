@@ -22,6 +22,8 @@
 		<meta property="og:description" content="Analyze any of your groupme's at the click of a button.">
 
 		<meta name="description" content="Analyze any of your groupme's at the click of a button.">
+		
+		<meta name="format-detection" content="telephone=no">
 
 		<!-- Favicons -->
 		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
