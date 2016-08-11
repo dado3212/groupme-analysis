@@ -17,7 +17,7 @@
 
 		<meta property="og:type" content="website">
 		<meta property="og:title" content="Groupme Analysis">
-		<meta property="og:image" content="http://groupmeanalysis.com/assets/images/header.png">
+		<meta property="og:image" content="http://groupmeanalysis.com/assets/images/summary.png">
 		<meta property="og:url" content="http://groupmeanalysis.com">
 		<meta property="og:description" content="Analyze any of your groupme's at the click of a button.">
 
