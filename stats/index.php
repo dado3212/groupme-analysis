@@ -1,35 +1,33 @@
 <?php
-	// error_reporting(E_ALL);
-	// ini_set('display_errors', 1);
+	define("API", TRUE);
+	include_once("../php/groupme.php");
 
-	define('API', TRUE);
-	include_once('../php/groupme.php');
-
-	// Pull information from database (analyze step)
+	// Pull information from database - pre analyzed
 	$PDO = createConnection();
 
 	$stmt = $PDO->prepare("SELECT * FROM groups WHERE name=:name AND password=:password");
-	$stmt->bindValue(":name", $_GET['group'], PDO::PARAM_STR);
-	$stmt->bindValue(":password", $_GET['password'], PDO::PARAM_STR);
+	$stmt->bindValue(":name", $_GET["group"], PDO::PARAM_STR);
+	$stmt->bindValue(":password", $_GET["password"], PDO::PARAM_STR);
 
 	$stmt->execute();
 
 	$response = $stmt->fetch(PDO::FETCH_ASSOC);
 
+	// If there's a proper match, then display it
 	if ($response) {
 
 	$info = json_decode($response["data"], true);
 
+	// Pull out useful pieces for identification
 	$names = $info["total"]["names"];
 	$topics = $info["total"]["topics"];
-
 	$people = $info["individuals"];
-
-	usort($people, function($a, $b) { return $a["name"] > $b["name"]; });
 
 	usort($names, function($a, $b) { return $a["time"] < $b["time"]; });
 	usort($topics, function($a, $b) { return $a["time"] < $b["time"]; });
+	usort($people, function($a, $b) { return $a["name"] > $b["name"]; });
 
+	// Use the group name or (backwards compatible) use the most recent change
 	if (isset($info["total"]["name"])) {
 		$name = $info["total"]["name"];
 	} else if (isset($names) && count($names) > 0) {
@@ -38,6 +36,7 @@
 		$name = "";
 	}
 
+	// Use the group topic or (backwards compatible) use the most recent change
 	if (isset($info["total"]["topic"])) {
 		$topic = $info["total"]["topic"];
 	} else if (isset($topics) && count($topics) > 0) {
@@ -87,7 +86,7 @@
 
 		<?php
 			// Respect request desktop
-			if (preg_match("/(iPhone|iPod|iPad|Android|BlackBerry|Mobile)/i", $_SERVER['HTTP_USER_AGENT'])) {
+			if (preg_match("/(iPhone|iPod|iPad|Android|BlackBerry|Mobile)/i", $_SERVER["HTTP_USER_AGENT"])) {
 				?><meta name="viewport" content="width=700"><?php
 			}
 		?>
@@ -130,13 +129,13 @@
 
 				var chart = new google.visualization.ColumnChart(document.getElementById('histogram'));
 
-				chartOptions.width = $(".all .detail").width();
+				chartOptions.width = $('.all .detail').width();
 				chart.draw(data, chartOptions);
 
 				$(window).resize(function () {
-					$("#histogram").hide();
-					chartOptions.width = $(".all .detail").width();
-					$("#histogram").show();
+					$('#histogram').hide();
+					chartOptions.width = $('.all .detail').width();
+					$('#histogram').show();
 					chart.draw(data, chartOptions);
 				});
 			}
@@ -158,7 +157,7 @@
 		<header>
 			<h1><?php echo $name ?></h1>
 			<h3><?php echo $topic ?></h3>
-			<h6><?php echo "(As of " . date("M d, Y h:i a", strtotime($response['date'])) . ")"; ?></h6>
+			<h6><?php echo "(As of " . date("M d, Y h:i a", strtotime($response["date"])) . ")"; ?></h6>
 		</header>
 		<div id="tabs">
 			<ul>
@@ -172,34 +171,34 @@
 							<i class="fa fa-user" aria-hidden="true"></i>
 							Members
 						</h4>
-						<?php echo number_format(count($info['individuals']) - 1); ?>
+						<?php echo number_format(count($info["individuals"]) - 1); ?>
 					</div>
 					<div>
 						<h4>
 							<img src="../assets/images/groupme.png" />
 							Comments
 						</h4>
-						<?php echo number_format($info['total']['comments']); ?>
+						<?php echo number_format($info["total"]["comments"]); ?>
 					</div>
 					<div>
 						<h4>
 							<i class="fa fa-book" aria-hidden="true"></i>
 							Words
 						</h4>
-						<?php echo number_format($info['total']['words']); ?>
+						<?php echo number_format($info["total"]["words"]); ?>
 					</div>
 					<div>
 						<h4>
 							<img src="../assets/images/heart.png" />
 							Likes
 						</h4>
-						<?php echo number_format($info['total']['likes']); ?>
+						<?php echo number_format($info["total"]["likes"]); ?>
 					</div>
 				</div>
 				<div id="mentions">
-					<div class='wrapper'>
+					<div class="wrapper">
 						<h2>Most Mentioned</h2>
-						<?php foreach ($info['total']['mentions'] as $id => $number) {
+						<?php foreach ($info["total"]["mentions"] as $id => $number) {
 							$author = $info["individuals"][$id];
 							?>
 							<div>
@@ -213,8 +212,8 @@
 				<div id="comments">
 					<ul>
 						<h2>Best Comments</h2>
-					<?php for ($i = 0; $i < count($info['total']['popular']); $i++) {
-						$post = $info['total']['popular'][$i];
+					<?php for ($i = 0; $i < count($info["total"]["popular"]); $i++) {
+						$post = $info["total"]["popular"][$i];
 						if ($post["sender_type"] == "user") {
 							if (array_key_exists($post["sender_id"], $info["individuals"])) {
 								$author = $info["individuals"][$post["sender_id"]]["name"];
@@ -258,9 +257,9 @@
 					<?php
 						for ($i = 0; $i < count($people); $i++) {
 							$person = $people[$i]; ?>
-							<div data-id='<?php echo $i; ?>' <?php if ($i == 0) echo "class='active'"; ?> onclick="changePerson(people[<?php echo $i; ?>], this)">
-								<div class="profile" style="background-image: url('<?php echo $person['image']; ?>')"></div>
-								<span><?php echo $person['name']; ?></span>
+							<div data-id="<?php echo $i; ?>" <?php if ($i == 0) echo "class='active'"; ?> onclick="changePerson(people[<?php echo $i; ?>], this)">
+								<div class="profile" style="background-image: url('<?php echo ($person["image"] ? $person["image"] : ""); ?>')"></div>
+								<span><?php echo $person["name"]; ?></span>
 							</div>
 						<?php }
 					?>
@@ -337,6 +336,10 @@
 						Words
 						<span></span>
 					</div>
+					<div class="type" data-sort="best_comment">
+						Best Comment
+						<span></span>
+					</div>
 					<div class="type" data-sort="likes_received">
 						Likes Received
 						<span></span>
@@ -364,6 +367,6 @@
 		</script>
 	</body>
 </html>
-<?php } else {
-	header('Location: http://www.alexbeals.com/projects/groupme') ;
+<?php } else { // Not a real entry
+	header("Location: ../") ;
 } ?>

@@ -32,27 +32,31 @@ $(document).ready(function() {
     // Handle custom sort functions
     if (sort == 'name') {
       sort_function = function(a,b) {
-        return (ascending ? -1 : 1) * (people[b]['name'].localeCompare(people[a]['name']))
+        return (ascending ? -1 : 1) * (people[b]['name'].localeCompare(people[a]['name']));
       };
     } else if (sort == 'comments') {
       sort_function = function(a,b) {
-        return (ascending ? -1 : 1) * (people[a]['total_number'] - people[b]['total_number'])
+        return (ascending ? -1 : 1) * (people[a]['total_number'] - people[b]['total_number']);
       };
     } else if (sort == 'words') {
       sort_function = function(a,b) {
-        return (ascending ? -1 : 1) * (people[a]['total_words'] - people[b]['total_words'])
+        return (ascending ? -1 : 1) * (people[a]['total_words'] - people[b]['total_words']);
       };
     } else if (sort == 'likes_received') {
       sort_function = function(a,b) {
-        return (ascending ? -1 : 1) * (people[a]['total_likes_received'] - people[b]['total_likes_received'])
+        return (ascending ? -1 : 1) * (people[a]['total_likes_received'] - people[b]['total_likes_received']);
       };
     } else if (sort == 'likes_given') {
       sort_function = function(a,b) {
-        return (ascending ? -1 : 1) * (people[a]['total_likes_given'] - people[b]['total_likes_given'])
+        return (ascending ? -1 : 1) * (people[a]['total_likes_given'] - people[b]['total_likes_given']);
       };
     } else if (sort == 'self_likes') {
       sort_function = function(a,b) {
-        return (ascending ? -1 : 1) * (people[a]['self_likes'] - people[b]['self_likes'])
+        return (ascending ? -1 : 1) * (people[a]['self_likes'] - people[b]['self_likes']);
+      };
+    } else if (sort == 'best_comment') {
+      sort_function = function(a,b) {
+        return (ascending ? -1 : 1) * (people[a]['max_likes'] - people[b]['max_likes']);
       };
     }
 
@@ -65,7 +69,7 @@ $(document).ready(function() {
     // Repopulates with sorted
     $('.people').html('');
     for (var key of people_sorted) {
-      $('.people').append('<div data-id="' + key + '" onclick="changePerson(people[' + key + '], this)"><div class="profile" style="background-image: url(\'' + (people[key].image ? people[key].image : '\'\'') + '\')"></div><span>' + people[key].name + '</span></div>');
+      $('.people').append('<div data-id="' + key + '" onclick="changePerson(people[' + key + '], this)"><div class="profile" style="background-image: url(\'' + (people[key].image ? people[key].image : '') + '\')"></div><span>' + people[key].name + '</span></div>');
     }
 
     // Reactivates current person in sidebar

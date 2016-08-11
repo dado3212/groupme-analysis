@@ -2,9 +2,7 @@ $background: #e6e5e0;
 $blue: #00aff0;
 $text-color: #484c55;
 
-$highlight-color: #77c32f;
-
-$well-color: #f8f8f8;
+$well-color: #ebebeb;
 
 html, body {
 	margin: 0px;
@@ -60,7 +58,7 @@ button:active, .button:active {
 }
 
 .well {
-	background-color: darken($well-color, 5%);
+	background-color: $well-color;
 	border-left: 2px solid $blue;
 
 	display: table;
