@@ -1,4 +1,6 @@
 <?php
+	ini_set("memory_limit", "1024M");
+
 	if (!defined("API")) {
 		die("Direct access not permitted.");
 	}
