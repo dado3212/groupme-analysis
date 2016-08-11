@@ -1,10 +1,9 @@
 # Groupme Analysis
 
-A bot that provides easy and comprehensive groupme analysis.
+Check out the live site at [https://groupmeanalysis.com](https://groupmeanalysis.com)!
 
-Process to add:
+This site was a side project of mine after I did this manually using GroupMe's API, and realized it could be turned into a much more automated and powerful tool.
 
-* Navigate to the website, and click 'Analyze Group'.  It will then provide a 10 digit code.
-* Add a user to the group you want to analyze using the number '619-432-4317', and name the user with the provided 10 digit code.  
-* Once the bot detects that it's been added to the group, it will process the messages, and provide analysis of the group before removing itself.
-* Share the analysis wherever!
+The app runs using GroupMe's REST API, and then runs off of a combination of HTML, CSS, JS/jQuery, PHP, and MySQL.
+
+Simply add the bot with the corresponding phone number and name, and at the touch of a button your groupme will be analyzed, giving info like best comments, the people with the most likes, who likes you the most, who do you have the most in common with, etc.
