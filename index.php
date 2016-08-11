@@ -24,6 +24,7 @@
 		<meta name="description" content="Analyze any of your groupme's at the click of a button.">
 		
 		<meta name="format-detection" content="telephone=no">
+		<meta name="google-site-verification" content="YIEgaynlS5pGb3Iw0EK4MqnNR5kcOX5GSgSq_30vQok" />
 
 		<!-- Favicons -->
 		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
