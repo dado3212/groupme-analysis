@@ -100,7 +100,7 @@
 						<h3>Step 4</h3>
 						<span id="alert"></span>
 						<div>
-							Click this button once the user has been added to the group! (Note: each code can only be used once.  Reload the page to get a new code.)
+							Click this button once the user has been added to the group!<br>Note: each code can only be used once.  Reload the page to get a new code.
 							<button type="submit" id="added" data-name="<?php echo $name; ?>">
 								Added!
 								<div id="spinner">
