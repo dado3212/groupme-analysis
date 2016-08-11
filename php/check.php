@@ -1,12 +1,9 @@
 <?php
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
+	define("API", TRUE);
+	include_once("groupme.php");
 
-	define('API', TRUE);
-	include_once('groupme.php');
-
-	if (isset($_POST['name']) && strlen($_POST['name']) == 6) {
-		$group = findGroupByName($_POST['name']);
+	if (isset($_POST["name"]) && strlen($_POST["name"]) == 6) {
+		$group = findGroupByName($_POST["name"]);
 		if ($group) {
 			$response = [
 				"response" => "success",

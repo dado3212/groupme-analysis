@@ -1,14 +1,8 @@
 <?php
-	// error_reporting(E_ALL);
-	// ini_set('display_errors', 1);
-
-	if (!defined('API')) {
-		die('Direct access not permitted.');
+	if (!defined("API")) {
+		die("Direct access not permitted.");
 	}
-	// define('API', true);
-	require_once('secret.php');
-
-	// echo "<pre>" . print_r(getCurrentGroupInfo("23694922"), true) . "</pre>";
+	require_once("secret.php");
 
 	/**
 	 * Attempts to find the group in which it has a given name
@@ -25,11 +19,11 @@
 		$contents = curl_exec($ch);
 		curl_close($ch);
 
-		$groups = json_decode($contents, true)['response'];
+		$groups = json_decode($contents, true)["response"];
 		foreach ($groups as $group) {
-			foreach ($group['members'] as $member) {
-				if ($member['user_id'] == $ME && $member['nickname'] == $name) {
-					return $group['group_id'];
+			foreach ($group["members"] as $member) {
+				if ($member["user_id"] == $ME && $member["nickname"] == $name) {
+					return $group["group_id"];
 				}
 			}
 		}
@@ -37,7 +31,7 @@
 	}
 
 	/**
-	 * Attempts to find current group information (name, description, image, etc.)
+	 * Attempts to find current group information (name, description, image, creation timestamp)
 	 * @param $group The id of the group
 	 * @return the group id if successful, otherwise false
 	 */
@@ -50,12 +44,12 @@
 		$contents = curl_exec($ch);
 		curl_close($ch);
 
-		$data = json_decode($contents, true)['response'];
+		$data = json_decode($contents, true)["response"];
 		return [
-			"name" => $data['name'],
-			"image" => $data['image_url'],
-			"topic" => $data['description'],
-			"created_at" => $data['created_at'],
+			"name" => $data["name"],
+			"image" => $data["image_url"],
+			"topic" => $data["description"],
+			"created_at" => $data["created_at"],
 		];
 	}
 
@@ -118,7 +112,7 @@
 
 
 					// Add to array of all posts and their times
-					$members[$poster]["times"][date('G', $message["time"])] += 1;
+					$members[$poster]["times"][date("G", $message["time"])] += 1;
 
 					// Check top comment
 					if (count($message["likes"]) > $members[$poster]["max_likes"]) {
@@ -220,11 +214,11 @@
 				"comments" => $totalComments,
 				"likes" => $totalLikes,
 				"names" => $names,
-				"name" => $groupInfo['name'],
+				"name" => $groupInfo["name"],
 				"topics" => $topics,
-				"topic" => $groupInfo['topic'],
-				"image" => $groupInfo['image'],
-				"creation" => $groupInfo['created_at'],
+				"topic" => $groupInfo["topic"],
+				"image" => $groupInfo["image"],
+				"creation" => $groupInfo["created_at"],
 				"words" => $words,
 				"popular" => $mostPopular,
 				"mentions" => $mentions,
@@ -247,25 +241,25 @@
 		$contents = curl_exec($ch);
 		curl_close($ch);
 
-		$rawMembers = json_decode($contents, true)['response']['members'];
+		$rawMembers = json_decode($contents, true)["response"]["members"];
 		$members = [];
 
 		foreach ($rawMembers as $member) {
-			if ($member['user_id'] != $ME) {
-				$members[$member['user_id']] = [
-					'name' => $member['nickname'],
-					'image' => $member['image_url'],
-					'id' => $member['user_id'],
-					'total_likes_received' => 0,
-					'total_likes_given' => 0,
-					'total_number' => 0,
-					'self_likes' => 0,
-					'total_words' => 0,
-					'max_likes' => 0,
-					'best_comment' => '',
-					'shared' => [],
-					'loved' => [],
-					'times' => [
+			if ($member["user_id"] != $ME) {
+				$members[$member["user_id"]] = [
+					"name" => $member["nickname"],
+					"image" => $member["image_url"],
+					"id" => $member["user_id"],
+					"total_likes_received" => 0,
+					"total_likes_given" => 0,
+					"total_number" => 0,
+					"self_likes" => 0,
+					"total_words" => 0,
+					"max_likes" => 0,
+					"best_comment" => "",
+					"shared" => [],
+					"loved" => [],
+					"times" => [
 						0 => 0,
 						1 => 0,
 						2 => 0,
@@ -319,7 +313,7 @@
 		curl_close($ch);
 
 		if ($contents) {
-			foreach ($contents['response']['messages'] as $msg) {
+			foreach ($contents["response"]["messages"] as $msg) {
 				$messages[] = [
 					"attachments" => $msg["attachments"],
 					"likes" => $msg["favorited_by"],
@@ -348,43 +342,11 @@
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/{$group}/messages?token=${TOKEN}");
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));        
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));        
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, '{"message": {"text":"' . $message . '"}}');
+		curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"message\": {\"text\":\"$message\"}}");
 		$contents = json_decode(curl_exec($ch), true);
 		curl_close($ch);
-	}
-
-	/**
-	 * Leaves a group
-	 * @param $group The group ID
-	 * @return void
-	 */
-	function leaveGroup($group) {
-		global $TOKEN;
-		global $ME;
-
-		// Finds membership ID
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/${group}?token=${TOKEN}");
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$contents = curl_exec($ch);
-		curl_close($ch);
-
-		$rawMembers = json_decode($contents, true)['response']['members'];
-
-		foreach ($rawMembers as $member) {
-			if ($member["user_id"] === $ME) {
-				// Leaves group
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, "https://api.groupme.com/v3/groups/{$group}/members/{$member['id']}/remove?token={$TOKEN}");
-				curl_setopt($ch, CURLOPT_POST, 1);
-				curl_exec($ch);
-				curl_close($ch);
-
-				return;
-			}
-		}
 	}
 ?>
