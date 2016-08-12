@@ -308,7 +308,7 @@
 						<div class="best-comment">
 							<h3>Best Comment</h3>
 							<div class="top">
-								<span class="likes"><img src="../assets/images/heart.png" /><?php echo count($post["likes"]); ?></span>
+								<span class="likes"><img src="../assets/images/heart.png" /></span>
 							</div>
 							<div class="content">
 							</div>

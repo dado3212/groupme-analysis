@@ -314,7 +314,7 @@
 		$contents = json_decode(curl_exec($ch), true);
 		curl_close($ch);
 
-		if ($contents && $contents["response"]["message"]) {
+		if ($contents && $contents["response"]["messages"]) {
 			foreach ($contents["response"]["messages"] as $msg) {
 				$messages[] = [
 					"attachments" => $msg["attachments"],

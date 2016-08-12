@@ -115,7 +115,7 @@ $(document).ready(function() {
     }
 
     // People with common likes
-    $('.shared').html('<h4># of Commonly Liked Posts</h4>');
+    $('.shared').html('<h4># of Posts You Both Like</h4>');
     var shared_sorted = Object.keys(person.shared).sort(function(a,b) {return person.shared[b]-person.shared[a]});
     for (var key of shared_sorted) {
       var sharer = people.filter(function (p) {
