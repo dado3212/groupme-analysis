@@ -24,7 +24,7 @@ button, .button {
   border-bottom: 5px solid #00658a;
   display: table;
   padding: 15px;
-  margin: 15px 0;
+  margin: 15px auto;
   transition: all 0.1s ease;
   position: relative; }
 
@@ -83,6 +83,7 @@ header {
   height: 400px;
   padding: 0px 20px;
   display: flex;
+  justify-content: space-around;
   flex-direction: row;
   align-items: center;
   overflow: hidden; }
@@ -177,6 +178,8 @@ header {
           width: 90%;
           font-size: 1.2em;
           margin: 10px auto; } }
+      .steps ul li button {
+        margin: 15px 0; }
       .steps ul li:hover {
         box-shadow: 0 0 15px #00aff0; }
       .steps ul li > div {

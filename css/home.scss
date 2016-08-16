@@ -42,7 +42,7 @@ button, .button {
 
 	display: table;
 	padding: 15px;
-	margin: 15px 0;
+	margin: 15px auto;
 
 	transition: all 0.1s ease;
 
@@ -127,6 +127,7 @@ header {
 	padding: 0px 20px;
 
 	display: flex;
+	justify-content: space-around;
 	flex-direction: row;
 	align-items: center;
 
@@ -269,6 +270,10 @@ header {
 				width: 90%;
 				font-size: 1.2em;
 				margin: 10px auto;
+			}
+
+			button {
+				margin: 15px 0;
 			}
 
 			&:hover {
