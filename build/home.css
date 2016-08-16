@@ -24,7 +24,7 @@ button, .button {
   border-bottom: 5px solid #00658a;
   display: table;
   padding: 15px;
-  margin: 15px auto;
+  margin: 15px 0;
   transition: all 0.1s ease;
   position: relative; }
 
@@ -93,38 +93,99 @@ header {
     text-align: center; }
   .cta img {
     height: 500px;
-    min-width: 300px;
-    transform: rotate(30deg);
-    margin-bottom: -170px;
-    margin-right: 100px; }
+    min-width: 410px;
+    margin-bottom: -80px; }
 
-.steps ul {
-  list-style-type: none;
-  padding: 30px 0 1px 0;
-  max-width: 50em;
-  margin: 0 auto; }
-  .steps ul .row {
+.demo {
+  padding: 1px 20px; }
+  .demo h2 {
+    text-align: center; }
+  .demo img {
+    max-width: 400px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); }
+  .demo > div {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 30px; }
-  .steps ul li {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    display: inline-block;
-    width: 45%;
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    transition: box-shadow 0.3s ease; }
-    .steps ul li:hover {
-      box-shadow: 0 0 15px #00aff0; }
-    .steps ul li > div {
-      flex: 1;
+    align-items: center; }
+    @media screen and (max-width: 766px) {
+      .demo > div {
+        flex-direction: column-reverse; } }
+    .demo > div .details {
+      display: inline-block;
+      font-size: 1.1em;
+      width: 16em;
+      height: 20em; }
+      @media screen and (max-width: 766px) {
+        .demo > div .details {
+          height: auto; } }
+      .demo > div .details div {
+        display: flex; }
+      .demo > div .details .tab {
+        flex: 1;
+        text-align: center;
+        padding: 5px;
+        color: white;
+        background-color: #00658a;
+        cursor: pointer; }
+        .demo > div .details .tab.active {
+          background-color: #00aff0;
+          position: relative; }
+          .demo > div .details .tab.active:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: calc(50% - 10px);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #00aff0; }
+      .demo > div .details li {
+        padding: 5px 0; }
+
+.steps {
+  background-color: #e6e5e0;
+  padding: 1px 20px; }
+  .steps h2 {
+    text-align: center; }
+  .steps ul {
+    list-style-type: none;
+    padding-left: 0px;
+    max-width: 50em;
+    margin: 0 auto; }
+    @media screen and (max-width: 766px) {
+      .steps ul {
+        padding-bottom: 30px; } }
+    .steps ul .row {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px; }
+      @media screen and (max-width: 766px) {
+        .steps ul .row {
+          flex-direction: column;
+          margin-bottom: 0px; } }
+    .steps ul li {
+      background-color: white;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      width: 45%;
+      padding: 20px;
+      text-align: center;
       display: flex;
       flex-direction: column;
-      justify-content: center; }
-    .steps ul li img {
-      max-width: 100%;
-      margin-top: 20px; }
+      transition: box-shadow 0.3s ease; }
+      @media screen and (max-width: 766px) {
+        .steps ul li {
+          width: 90%;
+          font-size: 1.2em;
+          margin: 10px auto; } }
+      .steps ul li:hover {
+        box-shadow: 0 0 15px #00aff0; }
+      .steps ul li > div {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; }
+      .steps ul li img {
+        max-width: 100%;
+        margin-top: 20px; }
 
 /*# sourceMappingURL=home.css.map */

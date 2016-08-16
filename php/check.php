@@ -2,7 +2,7 @@
 	define("API", TRUE);
 	include_once("groupme.php");
 
-	if (isset($_POST["name"]) && strlen($_POST["name"]) == 6) {
+	if (isset($_POST["name"]) && strlen($_POST["name"]) <= 9) {
 		$group = findGroupByName($_POST["name"]);
 		if ($group) {
 			$response = [

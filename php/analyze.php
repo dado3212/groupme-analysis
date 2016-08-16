@@ -3,7 +3,7 @@
 	include_once("groupme.php");
 
 	// If it's a valid name
-	if (isset($_POST["name"]) && strlen($_POST["name"]) == 6) {
+	if (isset($_POST["name"]) && strlen($_POST["name"]) <= 9) {
 		$group = findGroupByName($_POST["name"]);
 
 		// If the group matches (redundant check in case accessed directly)

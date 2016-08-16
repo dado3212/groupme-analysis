@@ -1,6 +1,7 @@
 <?php
-	// Character set adapted from http://ux.stackexchange.com/a/21078
-	$name = substr(str_shuffle(str_repeat("abcdefghkmnoprstwxzABCDEFGHJKLMNPQRTWXY", 6)), 0, 6);
+	ob_start();
+	include("php/code.php");
+	ob_end_clean();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +63,47 @@
 			</div>
 			<img src="assets/images/phone.png" alt="phone" />
 		</div>
+		<div class="demo">
+			<h2>Demo Statistics</h2>
+			<div class="group">
+				<img src="assets/images/group_demo.png" alt="Group Stats" />
+
+				<div class="details">
+					<div>
+						<span class="tab active" data-name="group">Group</span>
+						<span class="tab" data-name="individual">Individual</span>
+					</div>
+					<ul>
+						<li>Most mentioned individuals</li>
+						<li>Number of comments</li>
+						<li>Number of likes</li>
+						<li>Best comments</li>
+						<li>More!</li>
+					</ul>
+				</div>
+			</div>
+			<div class="individual" style="display: none;">
+				<img src="assets/images/individual_demo.png" alt="Individual Stats" />
+
+				<div class="details">
+					<div>
+						<span class="tab" data-name="group">Group</span>
+						<span class="tab active" data-name="individual">Individual</span>
+					</div>
+					<ul>
+						<li>Likes received</li>
+						<li>Likes given</li>
+						<li>Number of comments</li>
+						<li>Best comment</li>
+						<li>Activity by time</li>
+						<li>Who likes your posts</li>
+						<li>More!</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<div class="steps" id="steps">
+			<h2>Steps</h2>
 			<ul>
 				<div class="row">
 					<li>
@@ -90,7 +131,7 @@
 						<div>
 							Set the user's name to:
 							<div class="well">
-								<?php echo $name; ?>
+								<?php echo $code; ?>
 							</div>
 							and uncheck 'Save to your Address Book'
 						</div>
@@ -100,8 +141,8 @@
 						<h3>Step 4</h3>
 						<span id="alert"></span>
 						<div>
-							Click this button once the user has been added to the group!<br>Note: each code can only be used once.  Reload the page to get a new code.
-							<button type="submit" id="added" data-name="<?php echo $name; ?>">
+							Click this button once the user has been added to the group!<br>Note: each code can only be used once.
+							<button type="submit" id="added" data-name="<?php echo $code; ?>">
 								Added!
 								<div id="spinner">
 								</div>

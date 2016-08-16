@@ -302,7 +302,8 @@ header {
 			background-color: rgba(0, 0, 0, 0.1);
 
 			max-height: 69em;
-			overflow-y: scroll;
+			overflow-x: hidden;
+			overflow-y: auto;
 
 			position: relative;
 			z-index: 1;

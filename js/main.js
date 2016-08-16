@@ -1,4 +1,10 @@
 $(document).ready(function() {
+  // Handle tab switching for demo statistics
+  $('.demo .tab').on('click', function() {
+    $('.demo > div').css('display', 'none');
+    $('.demo .' + $(this).data('name')).css('display', 'flex');
+  });
+
   // Handle 'Added' button functionality
   $('#added').on('click', function() {
     var name = $(this).data('name');
@@ -32,13 +38,30 @@ $(document).ready(function() {
 
           if (res.response === "error") {
             $('#alert').removeClass().addClass('error');
+
+            $('#alert').html(res.message);
+
+            $('#spinner').css('display', 'none');
           } else {
             $('#alert').removeClass().addClass('success');
+
+            // Generate a new code
+            $.get('php/code.php')
+            .done(function(data) {
+              var code = $.parseJSON(data).code;
+
+              $('#added').data('name', code);
+              $('.well').html(code);
+
+              $('#alert').html(res.message + '  New code generated.');
+
+              $('#spinner').css('display', 'none');
+            }).fail(function() {
+              $('#alert').html(res.message + '  Reload the page for a new code.');
+
+              $('#spinner').css('display', 'none');
+            });
           }
-
-          $('#alert').html(res.message);
-
-          $('#spinner').css('display', 'none');
         });
       }
     })
