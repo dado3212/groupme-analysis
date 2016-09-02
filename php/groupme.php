@@ -184,7 +184,7 @@
 					];
 				}
 			} else { // Not currently handled (bot messages?)
-				echo $message["sender_type"];
+				// echo $message["sender_type"];
 			}
 		}
 
