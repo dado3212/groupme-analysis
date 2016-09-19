@@ -1,4 +1,4 @@
-# Groupme Analysis
+# <img src="/assets/favicon/android-chrome-192x192.png?raw=true" width="30" alt="Logo"/> Groupme Analysis
 
 Check out the live site at [https://groupmeanalysis.com](https://groupmeanalysis.com)!
 
