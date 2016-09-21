@@ -239,6 +239,7 @@ header {
       flex: 1;
       -webkit-flex: 1;
       padding: 10px;
+      max-width: 40em;
       border-left: 1px solid rgba(0, 0, 0, 0.3); }
       #individuals .all .detail h1 {
         padding-top: 0px; }
@@ -290,6 +291,8 @@ header {
         #individuals .all .detail .best-comment img {
           max-width: 200px;
           max-height: 200px; }
+        #individuals .all .detail .best-comment q {
+          word-break: break-word; }
       #individuals .all .detail .secondary-stats {
         display: flex;
         display: -webkit-flex;
