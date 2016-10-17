@@ -1,13 +1,20 @@
 <?php
 	define("API", TRUE);
 	include_once("../php/groupme.php");
+	include_once("../php/encryption.php");
+
+	// Checks if a string is valid JSON (used to determine if correct password)
+	function isJson($string) {
+	 json_decode($string);
+	 return (json_last_error() == JSON_ERROR_NONE);
+	}
 
 	// Pull information from database - pre analyzed
 	$PDO = createConnection();
 
-	$stmt = $PDO->prepare("SELECT * FROM groups WHERE name=:name AND password=:password");
+	$stmt = $PDO->prepare("SELECT * FROM groups WHERE name=:name");
 	$stmt->bindValue(":name", $_GET["group"], PDO::PARAM_STR);
-	$stmt->bindValue(":password", $_GET["password"], PDO::PARAM_STR);
+	$password = $_GET["password"];
 
 	$stmt->execute();
 
@@ -15,8 +22,11 @@
 
 	// If there's a proper match, then display it
 	if ($response) {
+	$decoded = decrypt($response["data"], str_pad($password, 32, "0"));
 
-	$info = json_decode($response["data"], true);
+	if (isJson($decoded)) {
+
+	$info = json_decode($decoded, true);
 
 	// Pull out useful pieces for identification
 	$names = $info["total"]["names"];
@@ -367,6 +377,9 @@
 		</script>
 	</body>
 </html>
-<?php } else { // Not a real entry
-	header("Location: ../") ;
+<?php } else { // Incorrect password
+		header("Location: ../");
+	}
+} else { // Not a valid group
+	header("Location: ../");
 } ?>

@@ -7,92 +7,105 @@ $(document).ready(function() {
 
   // Handle 'Added' button functionality
   $('#added').on('click', function() {
-    var name = $(this).data('name');
+    // Ignore clicks if still processing (try and avoid repeats)
+    if (!$(this).hasClass('disabled')) {
+      $(this).addClass('disabled');
 
-    // Start spinner
-    $('#spinner').css('display', 'inline-block');
+      var name = $(this).data('name');
 
-    // Check to see if the bot is in a group with that name
-    $.post('php/check.php', {
-      name: name, 
-    })
-    .done(function(data) {
-      var res = $.parseJSON(data);
+      // Start spinner
+      $('#spinner').css('display', 'inline-block');
 
-      // Error handling
-      if (res.response === 'error') {
-        $('#alert').removeClass().addClass('error');
-        $('#alert').html(res.message);
+      // Check to see if the bot is in a group with that name
+      $.post('php/check.php', {
+        name: name, 
+      })
+      .done(function(data) {
+        var res = $.parseJSON(data);
 
-        $('#spinner').css('display', 'none');
-      // Found group
-      } else {
-        $('#alert').removeClass().addClass('success');
-        $('#alert').html('Found group!  Beginning to analyze...');
+        // Error handling
+        if (res.response === 'error') {
+          $('#alert').removeClass().addClass('error');
+          $('#alert').html(res.message);
 
-        // Starts analyzing, stores to DB, returns update when done
-        $.post('php/analyze.php', {
-          name: name,
-        }).done(function(data) {
-          try {
-            var res = $.parseJSON(data);
+          $('#spinner').css('display', 'none');
+          $(this).removeClass('disabled');
+        // Found group
+        } else {
+          $('#alert').removeClass().addClass('success');
+          $('#alert').html('Found group!  Beginning to analyze...');
 
-            if (res.response === "error") {
-              $('#alert').removeClass().addClass('error');
+          // Starts analyzing, stores to DB, returns update when done
+          $.post('php/analyze.php', {
+            name: name,
+          }).done(function(data) {
+            try {
+              var res = $.parseJSON(data);
 
-              $('#alert').html(res.message);
+              if (res.response === "error") {
+                $('#alert').removeClass().addClass('error');
 
-              $('#spinner').css('display', 'none');
-            } else {
-              $('#alert').removeClass().addClass('success');
+                $('#alert').html(res.message);
 
-              // Generate a new code
-              $.get('php/code.php')
-              .done(function(data) {
-                try {
-                  var code = $.parseJSON(data).code;
+                $('#spinner').css('display', 'none');
+                $(this).removeClass('disabled');
+              } else {
+                $('#alert').removeClass().addClass('success');
 
-                  $('#added').data('name', code);
-                  $('.well').html(code);
+                // Generate a new code
+                $.get('php/code.php')
+                .done(function(data) {
+                  try {
+                    var code = $.parseJSON(data).code;
 
-                  $('#alert').html(res.message + '  New code generated.');
+                    $('#added').data('name', code);
+                    $('.well').html(code);
 
-                  $('#spinner').css('display', 'none');
-                } catch(err) {
-                  console.log(err);
+                    $('#alert').html(res.message + '  New code generated.');
+
+                    $('#spinner').css('display', 'none');
+                    $(this).removeClass('disabled');
+                  } catch(err) {
+                    console.log(err);
+                    $('#alert').html(res.message + '  Reload the page for a new code.');
+
+                    $('#spinner').css('display', 'none');
+                    $(this).removeClass('disabled');
+                  }
+                }).fail(function() {
                   $('#alert').html(res.message + '  Reload the page for a new code.');
 
                   $('#spinner').css('display', 'none');
-                }
-              }).fail(function() {
-                $('#alert').html(res.message + '  Reload the page for a new code.');
+                  $(this).removeClass('disabled');
+                });
+              }
+            } catch(err) {
+              console.log(err);
+              $('#alert').removeClass().addClass('error');
 
-                $('#spinner').css('display', 'none');
-              });
+              $('#alert').html('Something went wrong.  Check the group to see if analysis worked, otherwise contact the site administrator.');
+
+              $('#spinner').css('display', 'none');
+              $(this).removeClass('disabled');
             }
-          } catch(err) {
-            console.log(err);
+          })
+          .fail(function() {
             $('#alert').removeClass().addClass('error');
-
-            $('#alert').html('Something went wrong.  Check the group to see if analysis worked, otherwise contact the site administrator.');
+            $('#alert').html('Something went wrong.  Contact the site administrator.');
 
             $('#spinner').css('display', 'none');
-          }
-        })
-        .fail(function() {
-          $('#alert').removeClass().addClass('error');
-          $('#alert').html('Something went wrong.  Contact the site administrator.');
+            $(this).removeClass('disabled');
+          });
+        }
+      })
+      .fail(function() {
+        $('#alert').removeClass().addClass('error');
+        $('#alert').html('Something went wrong.  Contact the site administrator.');
 
-          $('#spinner').css('display', 'none');
-        });
-      }
-    })
-    .fail(function() {
-      $('#alert').removeClass().addClass('error');
-      $('#alert').html('Something went wrong.  Contact the site administrator.');
-
-      $('#spinner').css('display', 'none');
-    });
+        $('#spinner').css('display', 'none');
+        $(this).removeClass('disabled');
+      });
+    }
   });
 
   // Smooth scrolling through targets (source: https://css-tricks.com/snippets/jquery/smooth-scrolling/)
