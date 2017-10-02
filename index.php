@@ -31,13 +31,13 @@
 		<meta name="google-site-verification" content="YIEgaynlS5pGb3Iw0EK4MqnNR5kcOX5GSgSq_30vQok" />
 
 		<!-- Favicons -->
-		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" href="/assets/favicon/favicon-32x32.png" sizes="32x32">
-		<link rel="icon" type="image/png" href="/assets/favicon/favicon-16x16.png" sizes="16x16">
-		<link rel="manifest" href="/assets/favicon/manifest.json">
-		<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#00aff0">
-		<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
-		<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+		<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="assets/favicon/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="assets/favicon/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="assets/favicon/manifest.json">
+		<link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#00aff0">
+		<link rel="shortcut icon" href="assets/favicon/favicon.ico">
+		<meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
 		<meta name="theme-color" content="#00aff0">
 
 		<?php
@@ -59,7 +59,9 @@
 		<div class="cta">
 			<div>
 				<h1>Get all the statistics on your GroupMe messages!</h1>
-				<a class="button" href="#steps">Get Started</a>
+				<div class="button-wrapper">
+					<a class="button" href="#steps">Get Started</a>
+				</div>
 			</div>
 			<img src="assets/images/phone.png" alt="phone" />
 		</div>
@@ -142,11 +144,13 @@
 						<span id="alert"></span>
 						<div>
 							Click this button once the user has been added to the group!<br>Note: each code can only be used once.
-							<button type="submit" id="added" data-name="<?php echo $code; ?>">
-								Added!
-								<div id="spinner">
-								</div>
-							</button>
+							<div class="button-wrapper">
+								<button type="submit" id="added" data-name="<?php echo $code; ?>">
+									Added!
+									<div id="spinner">
+									</div>
+								</button>
+							</div>
 						</div>
 						<img src="assets/images/add3.jpg" alt="Stats Comment" />
 					</li>

@@ -26,6 +26,11 @@ button, input {
     outline: none;
 }
 
+.button-wrapper {
+	height: 5em;
+	text-align: center;
+}
+
 button, .button {
 	-webkit-appearance: none;
 	cursor: pointer;
@@ -38,11 +43,11 @@ button, .button {
 
 	border: none;
 	border-radius: 5px;
-	border-bottom: 5px solid darken($blue, 20%);
+	border-bottom: 0.25em solid darken($blue, 20%);
 
-	display: table;
-	padding: 15px;
-	margin: 15px auto;
+	display: inline-block;
+	padding: 0.8em;
+	margin: 0.8em auto;
 
 	transition: all 0.1s ease;
 
@@ -50,12 +55,12 @@ button, .button {
 }
 
 button:hover, .button:hover {
-	margin-top: 17px;
-	border-bottom: 3px solid darken($blue, 20%);
+	transform: translate(0, 0.15em);
+	border-bottom: 0.1em solid darken($blue, 20%);
 }
 
 button:active, .button:active {
-	margin-top: 20px;
+	transform: translate(0, 0.25em);
 	border-bottom: 0px;
 }
 
@@ -273,7 +278,8 @@ header {
 			}
 
 			button {
-				margin: 15px 0;
+				margin: 0.8em 0;
+				width: 100%;
 			}
 
 			&:hover {

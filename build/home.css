@@ -12,6 +12,10 @@ html, body {
 button, input {
   outline: none; }
 
+.button-wrapper {
+  height: 5em;
+  text-align: center; }
+
 button, .button {
   -webkit-appearance: none;
   cursor: pointer;
@@ -21,19 +25,19 @@ button, .button {
   color: white;
   border: none;
   border-radius: 5px;
-  border-bottom: 5px solid #00658a;
-  display: table;
-  padding: 15px;
-  margin: 15px auto;
+  border-bottom: 0.25em solid #00658a;
+  display: inline-block;
+  padding: 0.8em;
+  margin: 0.8em auto;
   transition: all 0.1s ease;
   position: relative; }
 
 button:hover, .button:hover {
-  margin-top: 17px;
-  border-bottom: 3px solid #00658a; }
+  transform: translate(0, 0.15em);
+  border-bottom: 0.1em solid #00658a; }
 
 button:active, .button:active {
-  margin-top: 20px;
+  transform: translate(0, 0.25em);
   border-bottom: 0px; }
 
 .well {
@@ -179,7 +183,8 @@ header {
           font-size: 1.2em;
           margin: 10px auto; } }
       .steps ul li button {
-        margin: 15px 0; }
+        margin: 0.8em 0;
+        width: 100%; }
       .steps ul li:hover {
         box-shadow: 0 0 15px #00aff0; }
       .steps ul li > div {
