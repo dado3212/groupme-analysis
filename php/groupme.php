@@ -65,13 +65,8 @@
 		global $TOKEN;
 		date_default_timezone_set("America/New_York");
 
+		// Get each of the (current) active memebers
 		$members = getMembers($group);
-
-		$messages = getMessages($group);
-
-		$groupInfo = getCurrentGroupInfo($group);
-
-		usort($messages, function ($a, $b) { return count($a["likes"]) < count($b["likes"]); });
 
 		// Total data
 		$totalComments = 0;
@@ -80,112 +75,130 @@
 		$names = [];
 		$topics = [];
 		$mentions = [];
+
+		// Get the current group information
+		$groupInfo = getCurrentGroupInfo($group);
+
+		// Process the messages in pieces
+		$messages = getMessages($group);
 		$mostPopular = array_slice($messages, 0, 10);
+		usort($mostPopular, function ($a, $b) { return count($a["likes"]) < count($b["likes"]); });
 
-		foreach ($messages as $message) {
-			$totalComments += 1;
-			$totalLikes += count($message["likes"]);
-			$words += count(explode(" ", $message["text"]));
+		while (count($messages) > 0) {
+			foreach ($messages as $message) {
+				$totalComments += 1;
+				$totalLikes += count($message["likes"]);
+				$words += count(explode(" ", $message["text"]));
 
-			if ($message["sender_type"] == "user") { // User message
-				$poster = $message["sender_id"];
+				// If more popular than the least popular message
+				if (count($message["likes"]) > count($mostPopular[count($mostPopular) - 1]["likes"])) {
+					// Pop the lowest one, add in the new one, and sort again by likes
+					array_pop($mostPopular);
+					$mostPopular[] = $message;
+					usort($mostPopular, function ($a, $b) { return count($a["likes"]) < count($b["likes"]); });
+				}
 
-				// Increment mentions
-				if (count($message["attachments"]) > 0) {
-					foreach ($message["attachments"] as $attachment) {
-						if ($attachment["type"] == "mentions") {
-							foreach ($attachment["user_ids"] as $id) {
-								if (array_key_exists($id, $mentions)) {
-									$mentions[$id] += 1;
-								} else {
-									$mentions[$id] = 1;
+				if ($message["sender_type"] == "user") { // User message
+					$poster = $message["sender_id"];
+
+					// Increment mentions
+					if (count($message["attachments"]) > 0) {
+						foreach ($message["attachments"] as $attachment) {
+							if ($attachment["type"] == "mentions") {
+								foreach ($attachment["user_ids"] as $id) {
+									if (array_key_exists($id, $mentions)) {
+										$mentions[$id] += 1;
+									} else {
+										$mentions[$id] = 1;
+									}
 								}
 							}
 						}
 					}
-				}
 
-				// If the poster is an existing member
-				if (array_key_exists($poster, $members)) {
-					// Increment total number of received likes, comments, and words
-					$members[$poster]["total_number"] += 1;
-					$members[$poster]["total_likes_received"] += count($message["likes"]);
-					$members[$poster]["total_words"] += count(explode(" ", $message["text"]));
+					// If the poster is an existing member
+					if (array_key_exists($poster, $members)) {
+						// Increment total number of received likes, comments, and words
+						$members[$poster]["total_number"] += 1;
+						$members[$poster]["total_likes_received"] += count($message["likes"]);
+						$members[$poster]["total_words"] += count(explode(" ", $message["text"]));
 
 
-					// Add to array of all posts and their times
-					$members[$poster]["times"][date("G", $message["time"])] += 1;
+						// Add to array of all posts and their times
+						$members[$poster]["times"][date("G", $message["time"])] += 1;
 
-					// Check top comment
-					if (count($message["likes"]) > $members[$poster]["max_likes"]) {
-						$members[$poster]["max_likes"] = count($message["likes"]);
-						$members[$poster]["best_comment"] = $message;
-					}
-
-					// Get those who like you
-					foreach ($message["likes"] as $lover) {
-						if (array_key_exists($lover, $members[$poster]["loved"])) {
-							$members[$poster]["loved"][$lover] += 1;
-						} else {
-							$members[$poster]["loved"][$lover] = 1;
+						// Check top comment
+						if (count($message["likes"]) > $members[$poster]["max_likes"]) {
+							$members[$poster]["max_likes"] = count($message["likes"]);
+							$members[$poster]["best_comment"] = $message;
 						}
-					}
-				}
-				
-				// Increment likes given
-				for ($i = 0; $i < count($message["likes"]); $i++) {
-					// The specific current liker
-					$liker = $message["likes"][$i];
 
-					// Everyone else who liked
-					$others = $message["likes"];
-					unset($others[$i]);
-
-					if (array_key_exists($liker, $members)) { // If the liker is an existing member
-						// Get those who like the same stuff as you
-						foreach ($others as $other) {
-							if (array_key_exists($other, $members[$liker]["shared"])) {
-								$members[$liker]["shared"][$other] += 1;
+						// Get those who like you
+						foreach ($message["likes"] as $lover) {
+							if (array_key_exists($lover, $members[$poster]["loved"])) {
+								$members[$poster]["loved"][$lover] += 1;
 							} else {
-								$members[$liker]["shared"][$other] = 1;
+								$members[$poster]["loved"][$lover] = 1;
 							}
 						}
-
-						$members[$liker]["total_likes_given"] += 1;
-
-						// Check self likes
-						if ($liker == $poster) {
-							$members[$poster]["self_likes"] += 1;
-						}
-					} else { // Liked by a non-existent member
-
 					}
+					
+					// Increment likes given
+					for ($i = 0; $i < count($message["likes"]); $i++) {
+						// The specific current liker
+						$liker = $message["likes"][$i];
+
+						// Everyone else who liked
+						$others = $message["likes"];
+						unset($others[$i]);
+
+						if (array_key_exists($liker, $members)) { // If the liker is an existing member
+							// Get those who like the same stuff as you
+							foreach ($others as $other) {
+								if (array_key_exists($other, $members[$liker]["shared"])) {
+									$members[$liker]["shared"][$other] += 1;
+								} else {
+									$members[$liker]["shared"][$other] = 1;
+								}
+							}
+
+							$members[$liker]["total_likes_given"] += 1;
+
+							// Check self likes
+							if ($liker == $poster) {
+								$members[$poster]["self_likes"] += 1;
+							}
+						} else { // Liked by a non-existent member
+
+						}
+					}
+				} else if ($message["sender_type"] == "system") { // System messages
+					if (
+						strpos($message["text"], "changed the topic to: ") !== false &&
+						strpos($message["text"], "changed the topic to: ") > 0 &&
+						(strpos($message["text"], "changed the group's name to ") === false || strpos($message["text"], "changed the group's name to ") > strpos($message["text"], "changed the topic to: "))
+					) { // Topic change
+						$topics[] = [
+							"name" => substr($message["text"], strpos($message["text"], "changed the topic to: ") + 22),
+							"time" => $message["time"],
+							"likes" => count($message["likes"]),
+						];
+					} else if (
+						strpos($message["text"], "changed the group's name to ") !== false &&
+						strpos($message["text"], "changed the group's name to ") > 0 &&
+						(strpos($message["text"], "changed the topic to: ") === false || strpos($message["text"], "changed the group's name to ") < strpos($message["text"], "changed the topic to: "))
+					) { // Group name change
+						$names[] = [
+							"name" => substr($message["text"], strpos($message["text"], "changed the group's name to ") + 28),
+							"time" => $message["time"],
+							"likes" => count($message["likes"]),
+						];
+					}
+				} else { // Not currently handled (bot messages?)
+					// echo $message["sender_type"];
 				}
-			} else if ($message["sender_type"] == "system") { // System messages
-				if (
-					strpos($message["text"], "changed the topic to: ") !== false &&
-					strpos($message["text"], "changed the topic to: ") > 0 &&
-					(strpos($message["text"], "changed the group's name to ") === false || strpos($message["text"], "changed the group's name to ") > strpos($message["text"], "changed the topic to: "))
-				) { // Topic change
-					$topics[] = [
-						"name" => substr($message["text"], strpos($message["text"], "changed the topic to: ") + 22),
-						"time" => $message["time"],
-						"likes" => count($message["likes"]),
-					];
-				} else if (
-					strpos($message["text"], "changed the group's name to ") !== false &&
-					strpos($message["text"], "changed the group's name to ") > 0 &&
-					(strpos($message["text"], "changed the topic to: ") === false || strpos($message["text"], "changed the group's name to ") < strpos($message["text"], "changed the topic to: "))
-				) { // Group name change
-					$names[] = [
-						"name" => substr($message["text"], strpos($message["text"], "changed the group's name to ") + 28),
-						"time" => $message["time"],
-						"likes" => count($message["likes"]),
-					];
-				}
-			} else { // Not currently handled (bot messages?)
-				// echo $message["sender_type"];
 			}
+			$messages = getMessages($group, [], $messages[count($messages)-1]["id"]);
 		}
 
 		// Clean up useful information
@@ -326,10 +339,9 @@
 					"time" => $msg["created_at"],
 				];
 			}
-
-			return getMessages($group, $messages, $messages[count($messages)-1]["id"]);
-		} else {
 			return $messages;
+		} else {
+			return [];
 		}
 	}
 
